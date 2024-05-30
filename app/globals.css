@@ -6,10 +6,25 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-wrap: balance;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer base {
+  body {
+    @apply bg-[#141414] text-white;
+  }
+}
+
+@layer components {
+  .center-flex {
+    @apply flex items-center justify-center;
+  }
+
+  .main-gradient {
+    background-image: linear-gradient(to right, rgb(238, 0, 0), rgb(236, 154, 0), rgb(255, 255, 70), rgb(1, 255, 1), rgb(0, 225, 255), rgb(238, 5, 238));
+  }
+
+  .nav-link {
+    @apply cursor-pointer duration-300 hover:text-[#07FFFF];
   }
 }
