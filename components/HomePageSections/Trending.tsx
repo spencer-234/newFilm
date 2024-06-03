@@ -2,14 +2,10 @@
 
 import Image from "next/image";
 import { imageUrl } from "@/utils/imageUrl";
-import { Movie } from "@/typings";
 import { useState } from "react";
+import { HomeProps } from "@/typings";
 
-interface Props {
-    media: Movie[]
-}
-
-const Trending = ({ media }: Props) => {
+const Trending = ({ media }: HomeProps) => {
 
     const [currentMovie, setCurrentMovie] = useState<number>(0);
 

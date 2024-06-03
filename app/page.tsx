@@ -4,12 +4,10 @@ import { Movie } from "@/typings";
 import { useState, useEffect } from "react";
 import { fetchHomeData } from "@/utils/home-page-fetch/fetchHomeData";
 import Image from "next/image";
-
 import Trending from "@/components/HomePageSections/Trending";
 
 interface MediaList {
   trending: Movie[],
-  popular: Movie[],
   topRated: Movie[],
   upcoming: Movie[],
 }
@@ -29,13 +27,19 @@ export default function Home() {
 
   return (
     <>
-      {homeMedia
+      <section className="w-screen h-[500px] center-flex flex-col overflow-hidden relative">
+        <h2 className="font-extrabold text-2xl">Welcome to <i className="main-gradient bg-clip-text text-transparent pr-1">NewFilm</i></h2>
+        <p>Your unique media experience to rate and favorite movies</p>
+        <div>
+          <a href="#">Login</a>
+          <a href="#">Sign Up</a>
+        </div>
+      </section>
+
+      {/* {homeMedia
         ? (
           <>
-            <Trending media={homeMedia?.trending} />
-            <div className="flex">
-
-            </div>
+            <Trending media={homeMedia.trending} />
           </>
         )
         : (
@@ -50,7 +54,7 @@ export default function Home() {
             />
           </section>
         )
-      }
+      } */}
     </>
   );
 } 
