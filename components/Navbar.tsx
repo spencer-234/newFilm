@@ -42,7 +42,7 @@ const Navbar = () => {
                         height={25}
                         priority={true}
                         alt="search-icon"
-                        className="cursor-pointer ml-auto mr-5"
+                        className="cursor-pointer ml-auto mr-5 md:mr-7"
                         onClick={() => handleSearchOpen()}
                     />
                     {menuOpen
@@ -62,7 +62,6 @@ const Navbar = () => {
                                     <li><a href="#" className="nav-link">Movies</a></li>
                                     <li><a href="#" className="nav-link">TV Shows</a></li>
                                     <li><a href="#" className="nav-link">Login</a></li>
-                                    <li><a href="#" className="nav-link">Sign Up</a></li>
                                 </ul>
                             </>
                         )
@@ -78,9 +77,8 @@ const Navbar = () => {
                             />
                         )
                     }
-                    <ul className=" hidden sm:center-flex gap-5">
+                    <ul className=" hidden sm:center-flex">
                         <li><a href="#" className="nav-link">Login</a></li>
-                        <li><a href="#" className="nav-link">Sign Up</a></li>
                     </ul>
                 </div>
                 {searchOpen && <Search open={searchOpen} />}
