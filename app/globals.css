@@ -15,7 +15,7 @@
 
 @layer base {
   body {
-    @apply bg-[#141414] text-white max-w-[var(--max-width)] overflow-x-hidden;
+    @apply bg-[#141414] text-white max-w-[var(--max-width)] overflow-x-hidden relative;
   }
 }
 
@@ -37,6 +37,34 @@
     transform-origin: top center;
   }
 
+  .search-open-animation {
+    animation: openSearch 300ms forwards;
+    transform-origin: center right;
+  }
+
+  /* styles for svg for curved sections */
+  .wave {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .wave svg {
+    position: relative;
+    display: block;
+    width: calc(136% + 1.3px);
+    height: 150px;
+  }
+
+  .wave .shape-fill {
+    fill: #141414;
+  }
+
+  /* animations */
+  /* mobile menu animation */
   @keyframes growDown {
     0% {
       transform: scaleY(0);
@@ -48,6 +76,17 @@
 
     100% {
       transform: scaleY(1);
+    }
+  }
+
+  /* animation for search bar */
+  @keyframes openSearch {
+    from {
+      width: 0px;
+    }
+
+    to {
+      width: calc(100% - 20px);
     }
   }
 }

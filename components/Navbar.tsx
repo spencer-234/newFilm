@@ -1,16 +1,26 @@
 "use client"
 
 import Image from "next/image"
+import Search from "./Search"
 import { useState } from "react"
 
 const Navbar = () => {
 
-    const [menuOpen, setMenuOpen] = useState<Boolean>(false);
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
+
+    const [searchOpen, setSearchOpen] = useState<boolean>(false);
+
+    const handleSearchOpen = () => {
+        if (menuOpen) {
+            setMenuOpen(false);
+        }
+        setSearchOpen((prev) => !prev);
+    }
 
     return (
         <header>
-            <nav className="center-flex px-4 md:px-[40px] w-screen py-3 bg-black transition-all">
-                <div className="flex items-center justify-between max-w-[var(--max-width)] w-full relative">
+            <nav className="center-flex px-4 md:px-[40px] w-screen py-3 bg-black transition-all relative">
+                <div className="flex items-center max-w-[var(--max-width)] w-full relative">
                     <div className="center-flex">
                         <Image
                             src="/assets/logo.png"
@@ -26,6 +36,15 @@ const Navbar = () => {
                             <li><a href="#" className="nav-link">TV Shows</a></li>
                         </ul>
                     </div>
+                    <Image
+                        src="/assets/search.svg"
+                        width={25}
+                        height={25}
+                        priority={true}
+                        alt="search-icon"
+                        className="cursor-pointer ml-auto mr-5"
+                        onClick={() => handleSearchOpen()}
+                    />
                     {menuOpen
                         ? (
                             <>
@@ -35,10 +54,10 @@ const Navbar = () => {
                                     height={35}
                                     priority={true}
                                     alt="menu-icon"
-                                    className="sm:hidden"
+                                    className="sm:hidden "
                                     onClick={() => setMenuOpen(false)}
                                 />
-                                <ul className="bg-black flex-col flex absolute top-[60px] right-[-1rem] w-[100px] mobile-menu sm:hidden items-end rounded gap-1 p-3">
+                                <ul className="bg-black flex-col flex absolute top-[60px] right-[-15px] w-[100px] mobile-menu sm:hidden items-end rounded gap-1 p-3">
                                     <li><a href="#" className="nav-link">Home</a></li>
                                     <li><a href="#" className="nav-link">Movies</a></li>
                                     <li><a href="#" className="nav-link">TV Shows</a></li>
@@ -60,20 +79,11 @@ const Navbar = () => {
                         )
                     }
                     <ul className=" hidden sm:center-flex gap-5">
-                        <li>
-                            <Image
-                                src="/assets/search.svg"
-                                width={25}
-                                height={25}
-                                priority={true}
-                                alt="search-icon"
-                                className="cursor-pointer"
-                            />
-                        </li>
                         <li><a href="#" className="nav-link">Login</a></li>
                         <li><a href="#" className="nav-link">Sign Up</a></li>
                     </ul>
                 </div>
+                {searchOpen && <Search open={searchOpen} />}
             </nav>
         </header>
     )
