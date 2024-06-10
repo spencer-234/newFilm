@@ -19,7 +19,7 @@ const Navbar = () => {
 
     return (
         <header>
-            <nav className="center-flex px-4 md:px-[40px] w-screen py-3 bg-black transition-all relative">
+            <nav className="center-flex px-4 md:px-[40px] w-screen py-3 bg-black transition-all relative z-[999]">
                 <div className="flex items-center max-w-[var(--max-width)] w-full relative">
                     <div className="center-flex">
                         <Image
@@ -57,7 +57,7 @@ const Navbar = () => {
                                     className="sm:hidden "
                                     onClick={() => setMenuOpen(false)}
                                 />
-                                <ul className="bg-black flex-col flex absolute top-[60px] right-[-15px] w-[100px] mobile-menu sm:hidden items-end rounded gap-1 p-3">
+                                <ul className="bg-black flex-col flex absolute top-[60px] right-[-15px] w-[100px] animate-growdown origin-top sm:hidden items-end rounded gap-1 p-3">
                                     <li><a href="#" className="nav-link">Home</a></li>
                                     <li><a href="#" className="nav-link">Movies</a></li>
                                     <li><a href="#" className="nav-link">TV Shows</a></li>

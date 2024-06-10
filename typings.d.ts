@@ -17,6 +17,16 @@ export interface Movie {
     name: string
 }
 
-export interface HomeProps {
-    media: Movie[]
+export interface MediaImageObject {
+    backdrops: MediaImage[]
+    id: number
+    logos: MediaImage[]
+    posters: MediaImage[]
+}
+
+export interface MediaImage {
+    aspect_ratio: number
+    height: number
+    iso_639_1?: string
+    file_path: string
 }

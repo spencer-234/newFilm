@@ -4,6 +4,7 @@
 
 :root {
   --max-width: 1800px;
+  --min-width: 300px;
 }
 
 * {
@@ -15,7 +16,11 @@
 
 @layer base {
   body {
-    @apply bg-[#141414] text-white max-w-[var(--max-width)] overflow-x-hidden relative;
+    @apply bg-[#141414] text-white overflow-x-hidden relative;
+  }
+
+  input {
+    @apply text-black outline-none;
   }
 }
 
@@ -25,16 +30,11 @@
   }
 
   .main-gradient {
-    background-image: linear-gradient(to right, rgb(238, 0, 0), rgb(236, 154, 0), rgb(255, 255, 70), rgb(1, 255, 1), rgb(0, 225, 255), rgb(238, 5, 238));
+    background-image: linear-gradient(to right, #ee0000, #ec9a00, #ffff46, #01ff01, #00e1ff, #ee05ee);
   }
 
   .nav-link {
     @apply cursor-pointer duration-300 hover:text-[#07FFFF];
-  }
-
-  .mobile-menu {
-    animation: growDown 300ms forwards;
-    transform-origin: top center;
   }
 
   .search-open-animation {
@@ -42,10 +42,14 @@
     transform-origin: center right;
   }
 
+  .object-custom-top {
+    object-position: 0% 10%;
+  }
+
   /* styles for svg for curved sections */
   .wave {
     position: absolute;
-    top: 0px;
+    top: 0;
     left: 0;
     width: 100%;
     overflow: hidden;
@@ -63,20 +67,17 @@
     fill: #141414;
   }
 
-  /* animations */
-  /* mobile menu animation */
-  @keyframes growDown {
-    0% {
-      transform: scaleY(0);
-    }
+  .slide {
+    opacity: 1;
+    transition: opacity 3s;
+  }
 
-    80% {
-      transform: scaleY(1.1);
-    }
+  .slide.fadeout {
+    opacity: 0;
+  }
 
-    100% {
-      transform: scaleY(1);
-    }
+  .slide.fadeIn {
+    opacity: 1;
   }
 
   /* animation for search bar */

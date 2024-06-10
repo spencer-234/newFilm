@@ -13,9 +13,9 @@ interface HomeData {
 
 export const GET = async () => {
     const homeRequests = {
-        fetchTrending: `${baseUrl}/trending/all/day?api_key=${process.env.API_KEY}&include_video=true&language=en-US`,
-        fetchTopRated: `${baseUrl}/movie/top_rated?api_key=${process.env.API_KEY}&include_video=true&language=en-US&page=1`,
-        fetchUpcoming: `${baseUrl}/movie/upcoming?api_key=${process.env.API_KEY}&include_video=true&language=en-US&page=1`,
+        fetchTrending: `${baseUrl}/trending/movie/day?api_key=${process.env.API_KEY}&language=en-US`,
+        fetchTopRated: `${baseUrl}/movie/top_rated?api_key=${process.env.API_KEY}&language=en-US&page=1`,
+        fetchUpcoming: `${baseUrl}/movie/upcoming?api_key=${process.env.API_KEY}&language=en-US&page=1`,
     };
 
     try {

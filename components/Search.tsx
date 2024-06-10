@@ -11,7 +11,6 @@ interface Props {
 const Search = ({ open }: Props) => {
     const [input, setInput] = useState<string>("");
     const [searchResults, setSearchResults] = useState<string[]>([]);
-    console.log(searchResults);
 
     useEffect(() => {
 
@@ -32,7 +31,7 @@ const Search = ({ open }: Props) => {
             <input
                 type="text"
                 placeholder="Search for movies or tv shows..."
-                className="w-full rounded-3xl px-3 py-1 text-black outline-none"
+                className="w-full rounded-3xl px-3 py-1"
                 onChange={(e) => setInput(e.target.value)}
             />
             {searchResults && searchResults.map((result, i) => (

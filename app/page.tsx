@@ -1,9 +1,11 @@
 "use client"
 
-import { Movie } from "@/typings";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Trending from "@/components/HomePageSections/Trending";
+import Link from "next/link";
+import { Movie } from "@/typings";
+import { HeroHighlight } from "@/components/Hero-Highlight";
 
 interface MediaList {
   trending: Movie[],
@@ -14,6 +16,7 @@ interface MediaList {
 export default function Home() {
 
   const [homeMedia, setHomeMedia] = useState<MediaList | null>(null);
+  const [email, setEmail] = useState<string>("");
 
   useEffect(() => {
     const getHomeMedia = async () => {
@@ -28,13 +31,15 @@ export default function Home() {
 
   return (
     <>
-      <section className="w-screen h-[500px] center-flex flex-col gap-3 text-center">
-        <h2 className="font-extrabold text-2xl">Welcome to <i className="main-gradient bg-clip-text text-transparent pr-1">NewFilm</i></h2>
-        <p className="text-xl">Your unique media experience to rate and favorite movies</p>
-        <div className="flex gap-5">
-          <a href="#" className="bg-white">Login</a>
-          <a href="#">Sign Up</a>
-        </div>
+      <section className="w-screen h-[400px] center-flex flex-col gap-3 text-center relative">
+        <HeroHighlight>
+          <h2 className="font-extrabold text-2xl">Welcome to <i className="main-gradient bg-clip-text text-transparent pr-1">NewFilm</i></h2>
+          <p className="text-xl">Your unique media experience to rate and favorite movies</p>
+          <div className="flex">
+            <input type="text" onChange={(e) => setEmail(e.target.value)} />
+            <Link href="#">Get Started</Link>
+          </div>
+        </HeroHighlight>
       </section>
 
       {homeMedia
