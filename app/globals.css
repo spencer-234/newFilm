@@ -46,6 +46,10 @@
     object-position: 0% 10%;
   }
 
+  .section-title {
+    @apply absolute z-[20] left-0 top-0 font-bold tracking-wider text-lg bg-black bg-opacity-90 pl-4 pr-2 py-2 rounded-ee-lg animate-growdown origin-top md:left-[100px] md:rounded-b-lg 2xl:left-[500px] lg:text-xl border-x-2 border-b-2 border-gray-500;
+  }
+
   /* styles for svg for curved sections */
   .wave {
     position: absolute;

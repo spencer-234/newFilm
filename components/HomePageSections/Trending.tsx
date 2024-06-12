@@ -5,6 +5,7 @@ import { imageUrl } from "@/utils/urlConstants";
 import { useState, useEffect, useRef } from "react";
 import { Movie } from "@/typings";
 import Image from "next/image";
+import { fetchMovieImages } from "@/utils/fetchMovieImages";
 
 interface Props {
     media: Movie[]
@@ -26,15 +27,14 @@ const Trending = ({ media }: Props) => {
         // fetch all images associated with movies
         const getTitleLogos = async () => {
             const movieIds = media.map(movie => movie.id);
-            await fetch(`/api/get-media/title-logos`, { method: 'POST', cache: 'no-store', body: JSON.stringify(movieIds) })
-                .then(res => res.json())
-                .then(data => setMovieImageData([...data.data]));
+            const res = await fetchMovieImages(`/api/get-media/title-logos`, movieIds);
+            setMovieImageData([...res]);
         }
 
         getTitleLogos();
 
         // start interval for slideshow of movies
-        // have if statements to check if zero or lenght and trsnalte + or - depending on each
+        // have if statements to check if zero or length and translateX + or - depending on each
         const interval = setInterval(() => {
             if (imageRef.current?.offsetWidth && containerRef.current) {
                 width = imageRef.current.offsetWidth;
@@ -65,7 +65,7 @@ const Trending = ({ media }: Props) => {
     return (
         <>
             <section className={`w-screen h-[500px] relative bg-[#161616] ${!movieImageData && 'animate-pulse'} overflow-hidden`}>
-                <h2 className="absolute z-[20] left-0 top-0 font-bold tracking-wider text-lg bg-black bg-opacity-90 pl-4 pr-2 py-2 rounded-ee-lg animate-growdown origin-top md:left-[100px] md:rounded-b-lg 2xl:left-[500px] lg:text-xl border-x-2 border-b-2 border-gray-500">Trending</h2>
+                <h2 className="section-title">Trending</h2>
                 {movieImageData && (
                     <div className="h-full w-fit flex duration-1000" ref={containerRef}>
                         {movieImageData.map((movie, i) => (

@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import { baseUrl } from "@/utils/urlConstants";
-import { MediaImageObject, Movie } from "@/typings";
+import { MediaImageObject } from "@/typings";
 
 export const POST = async (request: NextRequest) => {
     // get ids of movies 

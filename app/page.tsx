@@ -6,6 +6,7 @@ import Trending from "@/components/HomePageSections/Trending";
 import Link from "next/link";
 import { Movie } from "@/typings";
 import { HeroHighlight } from "@/components/Aceternity/Hero-Highlight";
+import TopRated from "@/components/HomePageSections/TopRated";
 
 interface MediaList {
   trending: Movie[],
@@ -47,6 +48,9 @@ export default function Home() {
         ? (
           <>
             <Trending media={homeMedia.trending} />
+            <div>
+              <TopRated media={homeMedia.topRated} />
+            </div>
           </>
         )
         : (
