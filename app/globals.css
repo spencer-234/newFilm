@@ -49,35 +49,23 @@
   /* styles for svg for curved sections */
   .wave {
     position: absolute;
-    top: 0;
+    bottom: -2px;
     left: 0;
     width: 100%;
     overflow: hidden;
     line-height: 0;
+    transform: rotate(180deg);
   }
 
   .wave svg {
     position: relative;
     display: block;
-    width: calc(136% + 1.3px);
-    height: 150px;
+    width: calc(100% + 1.3px);
+    height: 46px;
   }
 
   .wave .shape-fill {
     fill: #141414;
-  }
-
-  .slide {
-    opacity: 1;
-    transition: opacity 3s;
-  }
-
-  .slide.fadeout {
-    opacity: 0;
-  }
-
-  .slide.fadeIn {
-    opacity: 1;
   }
 
   /* animation for search bar */

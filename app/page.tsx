@@ -5,7 +5,7 @@ import Image from "next/image";
 import Trending from "@/components/HomePageSections/Trending";
 import Link from "next/link";
 import { Movie } from "@/typings";
-import { HeroHighlight } from "@/components/Hero-Highlight";
+import { HeroHighlight } from "@/components/Aceternity/Hero-Highlight";
 
 interface MediaList {
   trending: Movie[],
@@ -31,14 +31,15 @@ export default function Home() {
 
   return (
     <>
-      <section className="w-screen h-[400px] center-flex flex-col gap-3 text-center relative">
-        <HeroHighlight>
+      <section className="w-screen h-[400px] center-flex text-center relative">
+        <HeroHighlight className="center-flex flex-col gap-3">
           <h2 className="font-extrabold text-2xl">Welcome to <i className="main-gradient bg-clip-text text-transparent pr-1">NewFilm</i></h2>
-          <p className="text-xl">Your unique media experience to rate and favorite movies</p>
-          <div className="flex">
-            <input type="text" onChange={(e) => setEmail(e.target.value)} />
-            <Link href="#">Get Started</Link>
+          <p className="text-xl">Sign up now to watch your favorite movies and tv shows!</p>
+          <div className="flex w-full px-3">
+            <input type="email" onChange={(e) => setEmail(e.target.value)} className="rounded-s-md flex-1 pl-1" placeholder="Email Address" />
+            <Link href="#" className="rounded-e-md bg-red-600 px-3 flex-5 font-semibold">Get Started</Link>
           </div>
+          <span>Already have an account? <Link href="#" className="hover:underline">Login</Link></span>
         </HeroHighlight>
       </section>
 
