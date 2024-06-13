@@ -1,11 +1,10 @@
 "use client"
 
-import { MediaImageObject } from "@/typings";
+import { MediaImage, Movie } from "@/typings";
 import { imageUrl } from "@/utils/urlConstants";
 import { useState, useEffect, useRef } from "react";
-import { Movie } from "@/typings";
 import Image from "next/image";
-import { fetchMovieImages } from "@/utils/fetchMovieImages";
+import { fetchTitleImages } from "@/utils/fetchTitleImages";
 
 interface Props {
     media: Movie[]
@@ -13,7 +12,7 @@ interface Props {
 
 const Trending = ({ media }: Props) => {
 
-    const [movieImageData, setMovieImageData] = useState<MediaImageObject[] | null>(null);
+    const [movieImageData, setMovieImageData] = useState<Array<MediaImage[]> | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const imageRef = useRef<HTMLDivElement | null>(null);
 
@@ -26,8 +25,7 @@ const Trending = ({ media }: Props) => {
     useEffect(() => {
         // fetch all images associated with movies
         const getTitleLogos = async () => {
-            const movieIds = media.map(movie => movie.id);
-            const res = await fetchMovieImages(`/api/get-media/title-logos`, movieIds);
+            const res = await fetchTitleImages(`/api/get-media/title-logos`, media);
             setMovieImageData([...res]);
         }
 
@@ -64,24 +62,24 @@ const Trending = ({ media }: Props) => {
 
     return (
         <>
-            <section className={`w-screen h-[500px] relative bg-[#161616] ${!movieImageData && 'animate-pulse'} overflow-hidden`}>
+            <section className={`w-screen h-[400px] relative bg-[#161616] ${!movieImageData && 'animate-pulse'} overflow-hidden`}>
                 <h2 className="section-title">Trending</h2>
                 {movieImageData && (
                     <div className="h-full w-fit flex duration-1000" ref={containerRef}>
-                        {movieImageData.map((movie, i) => (
+                        {media.map((movie, i) => (
                             <div className="relative w-screen h-full" key={i} ref={imageRef}>
                                 <Image
-                                    src={`${imageUrl + movie.backdrops[0].file_path}`}
+                                    src={`${imageUrl + movie.backdrop_path}`}
                                     className="w-full h-full object-cover object-center lg:object-custom-top"
                                     width={0}
                                     height={0}
                                     sizes="100vw"
-                                    alt=""
+                                    alt={`${media[i].title}`}
                                 />
                                 <Image
-                                    src={`${imageUrl + movie.logos[0].file_path}`}
-                                    className="w-[90%] h-[30%] absolute bottom-20 left-5 right-auto sm:w-[60%] lg:left-10 max-w-[700px] bg-black bg-opacity-50 rounded-lg py-1 px-6 lg:bg-transparent"
-                                    alt=""
+                                    src={`${imageUrl + movieImageData[i][0].file_path}`}
+                                    className="w-[90%] h-[30%] absolute bottom-20 left-5 right-auto sm:w-[60%] lg:left-10 max-w-[700px] rounded-lg"
+                                    alt={`${media[i].title}`}
                                     width={0}
                                     height={0}
                                     sizes="100vw"

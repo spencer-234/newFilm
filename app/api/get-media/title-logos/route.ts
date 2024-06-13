@@ -13,12 +13,7 @@ export const POST = async (request: NextRequest) => {
         const movieImagesResponse = await Promise.all(movieImagesPromises.map(p => p.json()));
 
         // filter out the logos that are in english
-        const movieImages: MediaImageObject[] = movieImagesResponse.map((movie: MediaImageObject) => ({
-            backdrops: movie.backdrops,
-            id: movie.id,
-            logos: movie.logos.filter(logo => logo.iso_639_1 === 'en'),
-            posters: movie.posters
-        }));
+        const movieImages = movieImagesResponse.map((movie: MediaImageObject) => movie.logos.filter(logo => logo.iso_639_1 === 'en'));
 
         return NextResponse.json({ data: movieImages }, { status: 200 })
 

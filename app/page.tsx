@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Trending from "@/components/HomePageSections/Trending";
+import Trending from "@/components/Trending";
 import Link from "next/link";
 import { Movie } from "@/typings";
 import { HeroHighlight } from "@/components/Aceternity/Hero-Highlight";
-import TopRated from "@/components/HomePageSections/TopRated";
+import Slider from "@/components/Slider";
 
 interface MediaList {
   trending: Movie[],
@@ -48,9 +48,9 @@ export default function Home() {
         ? (
           <>
             <Trending media={homeMedia.trending} />
-            <div>
-              <TopRated media={homeMedia.topRated} />
-            </div>
+            <section className="w-screen h-[200px]">
+              <Slider media={homeMedia.topRated} type="movie" />
+            </section>
           </>
         )
         : (
