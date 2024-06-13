@@ -19,6 +19,9 @@ export default function Home() {
   const [homeMedia, setHomeMedia] = useState<MediaList | null>(null);
   const [email, setEmail] = useState<string>("");
 
+  // state for currently selected category in slider
+  const [upcoming, setUpcoming] = useState<boolean>(false);
+
   useEffect(() => {
     const getHomeMedia = async () => {
       const data = await fetch("/api/get-media/home", { method: 'GET', cache: 'no-store' })
@@ -49,7 +52,14 @@ export default function Home() {
           <>
             <Trending media={homeMedia.trending} />
             <section className="w-screen h-[200px]">
-              <Slider media={homeMedia.topRated} type="movie" />
+              <button onClick={() => setUpcoming(true)}>Change</button>
+              {!upcoming
+                ? (
+                  <Slider media={homeMedia.topRated} type="movie" />
+                )
+                : (
+                  <Slider media={homeMedia.upcoming} type="movie" />
+                )}
             </section>
           </>
         )

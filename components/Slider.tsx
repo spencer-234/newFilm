@@ -40,7 +40,7 @@ const Slider = ({ media, type }: Props) => {
         getMovieLogos();
     }, [media]);
     return (
-        <div className="flex gap-4 h-full overflow-x-hidden">
+        <div className="flex gap-4 h-full overflow-x-scroll no-scroll-horizontal">
             {movieImageData
                 ? media.map((movie: Movie, i: number) => (
                     <Link
@@ -98,8 +98,7 @@ const Slider = ({ media, type }: Props) => {
                     </Link>
                 ))
                 : media.map((movie, i) => (
-                    <div key={i}>
-
+                    <div key={i} className="w-[360px] h-full animate-pulse bg-[#2f2f2f] flex-shrink-0">
                     </div>
                 ))
             }

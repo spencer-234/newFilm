@@ -83,3 +83,9 @@
     }
   }
 }
+
+@layer utilities {
+  .no-scroll-horizontal::-webkit-scrollbar {
+    @apply bg-transparent h-0;
+  }
+}
