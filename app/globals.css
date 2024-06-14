@@ -106,6 +106,10 @@
 
 @layer utilities {
   .no-scroll-horizontal::-webkit-scrollbar {
-    @apply bg-transparent h-0;
+    @apply bg-transparent h-[5px];
+  }
+
+  .no-scroll-horizontal::-webkit-scrollbar-thumb {
+    @apply bg-slate-500;
   }
 }

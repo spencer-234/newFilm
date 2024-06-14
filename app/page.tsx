@@ -50,8 +50,8 @@ export default function Home() {
             <section className="w-screen py-8 px-4">
               <div className="center-flex w-fit gap-4 text-lg mb-5">
                 <h2 className="font-bold text-xl">Top Rated</h2>
-                <span className="option" onClick={() => setTv(false)}>Movies</span>
-                <span className="option" onClick={() => setTv(true)}>TV Series</span>
+                <span className={`option ${!tv && 'text-[#07FFFF]'}`} onClick={() => setTv(false)}>Movies</span>
+                <span className={`option ${tv && 'text-[#07FFFF]'}`} onClick={() => setTv(true)}>TV Series</span>
               </div>
               {!tv
                 ? (
