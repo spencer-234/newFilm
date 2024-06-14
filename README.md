@@ -5,3 +5,6 @@ This is a full stack website made using [Next.js](https://nextjs.org/). At the m
 
 ### API
 The api at the moment is primarily for fetching data from the [TMDB](https://developer.themoviedb.org/docs/getting-started) api and I put the code in the api to fetch instead of the client to prevent api keys being exposed on the client. All movie data is acquired through the TMDB api.
+
+### Live site
+[NewFilm](https://newfilm-self.vercel.app/)
