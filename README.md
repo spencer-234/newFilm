@@ -1,36 +1,7 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NewFilm
 
-## Getting Started
+## Description
+This is a full stack website made using [Next.js](https://nextjs.org/). At the moment only the homepage is completed, but I will be updating pages as time goes on. The styles for this project are made using [tailwind](https://tailwindcss.com/). I wanted to do a project where I made my own movie website with inspiration from Netflix and imdb. I used a components and svgs from [Shape Divider](https://www.shapedivider.app/) and [Aceternity](https://ui.aceternity.com/) to give the website a more modern feel. I hope you enjoy my work so far!
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### API
+The api at the moment is primarily for fetching data from the [TMDB](https://developer.themoviedb.org/docs/getting-started) api and I put the code in the api to fetch instead of the client to prevent api keys being exposed on the client. All movie data is acquired through the TMDB api.
