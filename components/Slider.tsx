@@ -13,6 +13,7 @@ interface Props {
     type: string
 }
 
+// Height is determined by parent div
 const Slider = ({ media, type }: Props) => {
 
     const [movieImageData, setMovieImageData] = useState<Array<MediaImage[]> | null>(null);
