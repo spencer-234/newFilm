@@ -31,9 +31,9 @@ const Navbar = () => {
                         />
                         <h1 className="ml-1 mr-10 font-bold text-2xl main-gradient bg-clip-text text-transparent pr-[5px]"><i>NewFilm</i></h1>
                         <ul className="hidden gap-5 sm:center-flex">
-                            <li><a href="#" className="nav-link">Home</a></li>
-                            <li><a href="#" className="nav-link">Movies</a></li>
-                            <li><a href="#" className="nav-link">TV Shows</a></li>
+                            <li><a href="#" className="option">Home</a></li>
+                            <li><a href="#" className="option">Movies</a></li>
+                            <li><a href="#" className="option">TV Shows</a></li>
                         </ul>
                     </div>
                     <Image
@@ -58,10 +58,10 @@ const Navbar = () => {
                                     onClick={() => setMenuOpen(false)}
                                 />
                                 <ul className="bg-black flex-col flex absolute top-[60px] right-[-15px] w-[100px] animate-growdown origin-top sm:hidden items-end rounded gap-1 p-3">
-                                    <li><a href="#" className="nav-link">Home</a></li>
-                                    <li><a href="#" className="nav-link">Movies</a></li>
-                                    <li><a href="#" className="nav-link">TV Shows</a></li>
-                                    <li><a href="#" className="nav-link">Login</a></li>
+                                    <li><a href="#" className="option">Home</a></li>
+                                    <li><a href="#" className="option">Movies</a></li>
+                                    <li><a href="#" className="option">TV Shows</a></li>
+                                    <li><a href="#" className="option">Login</a></li>
                                 </ul>
                             </>
                         )
@@ -78,7 +78,7 @@ const Navbar = () => {
                         )
                     }
                     <ul className=" hidden sm:center-flex">
-                        <li><a href="#" className="nav-link">Login</a></li>
+                        <li><a href="#" className="option">Login</a></li>
                     </ul>
                 </div>
                 {searchOpen && <Search open={searchOpen} />}

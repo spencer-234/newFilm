@@ -4,23 +4,19 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Trending from "@/components/Trending";
 import Link from "next/link";
-import { Movie } from "@/typings";
+import { HomeMedia } from "@/typings";
 import { HeroHighlight } from "@/components/Aceternity/Hero-Highlight";
 import Slider from "@/components/Slider";
+import Footer from "@/components/Footer";
 
-interface MediaList {
-  trending: Movie[],
-  topRated: Movie[],
-  upcoming: Movie[],
-}
 
 export default function Home() {
 
-  const [homeMedia, setHomeMedia] = useState<MediaList | null>(null);
+  const [homeMedia, setHomeMedia] = useState<HomeMedia | null>(null);
   const [email, setEmail] = useState<string>("");
 
   // state for currently selected category in slider
-  const [upcoming, setUpcoming] = useState<boolean>(false);
+  const [tv, setTv] = useState<boolean>(false);
 
   useEffect(() => {
     const getHomeMedia = async () => {
@@ -51,14 +47,23 @@ export default function Home() {
         ? (
           <>
             <Trending media={homeMedia.trending} />
-            <section className="w-screen h-[200px]">
-              <button onClick={() => setUpcoming(true)}>Change</button>
-              {!upcoming
+            <section className="w-screen py-8 px-4">
+              <div className="center-flex w-fit gap-4 text-lg mb-5">
+                <h2 className="font-bold text-xl">Top Rated</h2>
+                <span className="option" onClick={() => setTv(false)}>Movies</span>
+                <span className="option" onClick={() => setTv(true)}>TV Series</span>
+              </div>
+              {!tv
                 ? (
-                  <Slider media={homeMedia.topRated} type="movie" />
+                  <div className="h-[250px]">
+                    <Slider media={homeMedia.topRated} type="movie" />
+                  </div>
                 )
                 : (
-                  <Slider media={homeMedia.upcoming} type="movie" />
+                  // upcoming movies might not have all data. change type of movies fetched
+                  <div className="h-[250px]">
+                    <Slider media={homeMedia.topRatedTv} type="tv" />
+                  </div>
                 )}
             </section>
           </>
@@ -76,6 +81,7 @@ export default function Home() {
           </section>
         )
       }
+      <Footer />
     </>
   );
 } 

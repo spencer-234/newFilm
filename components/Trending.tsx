@@ -25,7 +25,7 @@ const Trending = ({ media }: Props) => {
     useEffect(() => {
         // fetch all images associated with movies
         const getTitleLogos = async () => {
-            const res = await fetchTitleImages(`/api/get-media/title-logos`, media);
+            const res = await fetchTitleImages(media, "movie");
             setMovieImageData([...res]);
         }
 
@@ -78,7 +78,7 @@ const Trending = ({ media }: Props) => {
                                 />
                                 <Image
                                     src={`${imageUrl + movieImageData[i][0].file_path}`}
-                                    className="w-[90%] h-[30%] absolute bottom-20 left-5 right-auto sm:w-[60%] lg:left-10 max-w-[700px] rounded-lg"
+                                    className="w-[90%] h-[30%] absolute bottom-20 left-5 right-auto sm:w-[60%] lg:left-10 max-w-[600px] rounded-lg"
                                     alt={`${media[i].title}`}
                                     width={0}
                                     height={0}

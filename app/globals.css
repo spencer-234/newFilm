@@ -33,7 +33,7 @@
     background-image: linear-gradient(to right, #ee0000, #ec9a00, #ffff46, #01ff01, #00e1ff, #ee05ee);
   }
 
-  .nav-link {
+  .option {
     @apply cursor-pointer duration-300 hover:text-[#07FFFF];
   }
 
@@ -69,6 +69,26 @@
   }
 
   .wave .shape-fill {
+    fill: #141414;
+  }
+
+  .second-wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .second-wave svg {
+    position: relative;
+    display: block;
+    width: calc(144% + 1.3px);
+    height: 110px;
+  }
+
+  .second-wave .shape-fill {
     fill: #141414;
   }
 

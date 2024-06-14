@@ -1,35 +1,28 @@
 // fetch data from tmdb api for initial homepage render.
 // request is in api instead on client to keep api key hidden.
-import { Movie } from "@/typings"
+import { Movie, HomeMedia } from "@/typings"
 import { NextResponse } from "next/server"
 import { baseUrl } from "@/utils/urlConstants"
-
-
-interface HomeData {
-    trending: Movie[],
-    topRated: Movie[],
-    upcoming: Movie[]
-}
 
 export const GET = async () => {
     const homeRequests = {
         fetchTrending: `${baseUrl}/trending/movie/day?api_key=${process.env.API_KEY}&language=en-US`,
         fetchTopRated: `${baseUrl}/movie/top_rated?api_key=${process.env.API_KEY}&language=en-US&page=1`,
-        fetchUpcoming: `${baseUrl}/movie/upcoming?api_key=${process.env.API_KEY}&language=en-US&page=1`,
+        fetchTopRatedTv: `${baseUrl}/discover/tv?api_key=${process.env.API_KEY}&include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200`,
     };
 
     try {
 
-        const [trending, topRated, upcoming]: Array<Movie[]> = await Promise.all([
+        const [trending, topRated, topRatedTv]: Array<Movie[]> = await Promise.all([
             fetch(homeRequests.fetchTrending).then((res) => res.json()).then((data) => data.results),
             fetch(homeRequests.fetchTopRated).then((res) => res.json()).then((data) => data.results),
-            fetch(homeRequests.fetchUpcoming).then((res) => res.json()).then((data) => data.results),
+            fetch(homeRequests.fetchTopRatedTv).then((res) => res.json()).then((data) => data.results),
         ])
 
-        const data: HomeData = {
+        const data: HomeMedia = {
             trending: trending,
             topRated: topRated,
-            upcoming: upcoming,
+            topRatedTv: topRatedTv,
         }
 
         return NextResponse.json({ data: data }, { status: 200 });

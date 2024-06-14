@@ -33,7 +33,7 @@ const Slider = ({ media, type }: Props) => {
 
     useEffect(() => {
         const getMovieLogos = async () => {
-            const res = await fetchTitleImages(`/api/get-media/title-logos`, media);
+            const res = await fetchTitleImages(media, type);
             setMovieImageData([...res]);
         }
 

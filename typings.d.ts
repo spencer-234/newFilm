@@ -43,3 +43,9 @@ export interface Video {
     published_at: string
     id: string
 }
+
+export interface HomeMedia {
+    trending: Movie[],
+    topRated: Movie[],
+    topRatedTv: Movie[],
+}
