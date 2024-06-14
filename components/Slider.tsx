@@ -11,10 +11,9 @@ import { useDebounce } from "@/hooks/useDebounce"
 interface Props {
     media: Movie[]
     type: string
-    height: number
 }
 
-const Slider = ({ media, type, height }: Props) => {
+const Slider = ({ media, type }: Props) => {
 
     const [movieImageData, setMovieImageData] = useState<Array<MediaImage[]> | null>(null);
     const [hovered, setHovered] = useState<number | null>(null);
@@ -46,7 +45,7 @@ const Slider = ({ media, type, height }: Props) => {
     }, [debouncedId])
 
     return (
-        <div className={`flex gap-4 h-[${height}px] overflow-x-scroll custom-scroll-horizontal`}>
+        <div className="flex gap-4 h-full overflow-x-scroll custom-scroll-horizontal">
             {movieImageData
                 ? media.map((movie: Movie, i: number) => (
                     <Link

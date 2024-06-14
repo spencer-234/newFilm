@@ -53,8 +53,16 @@ export default function Home() {
                 <span className={`option ${!tv && 'text-[#07FFFF]'}`} onClick={() => setTv(false)}>Movies</span>
                 <span className={`option ${tv && 'text-[#07FFFF]'}`} onClick={() => setTv(true)}>TV Series</span>
               </div>
-              {!tv && <Slider media={homeMedia.topRated} type="movie" height={250} />}
-              {tv && <Slider media={homeMedia.topRatedTv} type="tv" height={250} />}
+              {!tv && (
+                <div className="h-[250px]">
+                  <Slider media={homeMedia.topRated} type="movie" />
+                </div>
+              )}
+              {tv && (
+                <div className="h-[250px]">
+                  <Slider media={homeMedia.topRatedTv} type="tv" />
+                </div>
+              )}
             </section>
           </>
         )
