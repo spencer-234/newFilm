@@ -46,6 +46,10 @@
     object-position: 0% 10%;
   }
 
+  .object-custom-lg {
+    object-position: 0% 20%;
+  }
+
   .section-title {
     @apply absolute z-[20] left-0 top-0 font-bold tracking-wider text-lg bg-black bg-opacity-90 pl-4 pr-2 py-2 rounded-ee-lg animate-growdown origin-top md:left-[100px] md:rounded-b-lg 2xl:left-[500px] lg:text-xl border-x-2 border-b-2 border-gray-500;
   }
@@ -105,11 +109,11 @@
 }
 
 @layer utilities {
-  .no-scroll-horizontal::-webkit-scrollbar {
+  .custom-scroll-horizontal::-webkit-scrollbar {
     @apply bg-transparent h-[5px];
   }
 
-  .no-scroll-horizontal::-webkit-scrollbar-thumb {
+  .custom-scroll-horizontal::-webkit-scrollbar-thumb {
     @apply bg-slate-500;
   }
 }

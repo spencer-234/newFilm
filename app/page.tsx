@@ -53,18 +53,8 @@ export default function Home() {
                 <span className={`option ${!tv && 'text-[#07FFFF]'}`} onClick={() => setTv(false)}>Movies</span>
                 <span className={`option ${tv && 'text-[#07FFFF]'}`} onClick={() => setTv(true)}>TV Series</span>
               </div>
-              {!tv
-                ? (
-                  <div className="h-[250px]">
-                    <Slider media={homeMedia.topRated} type="movie" />
-                  </div>
-                )
-                : (
-                  // upcoming movies might not have all data. change type of movies fetched
-                  <div className="h-[250px]">
-                    <Slider media={homeMedia.topRatedTv} type="tv" />
-                  </div>
-                )}
+              {!tv && <Slider media={homeMedia.topRated} type="movie" height={250} />}
+              {tv && <Slider media={homeMedia.topRatedTv} type="tv" height={250} />}
             </section>
           </>
         )

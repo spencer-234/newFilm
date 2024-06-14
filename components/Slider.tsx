@@ -5,32 +5,23 @@ import { useEffect, useState } from "react"
 import { imageUrl } from "@/utils/urlConstants"
 import Link from "next/link"
 import { fetchVideos } from "@/utils/fetchVideos"
+import { useDebounce } from "@/hooks/useDebounce"
 
 
 interface Props {
     media: Movie[]
     type: string
+    height: number
 }
 
-const Slider = ({ media, type }: Props) => {
+const Slider = ({ media, type, height }: Props) => {
 
     const [movieImageData, setMovieImageData] = useState<Array<MediaImage[]> | null>(null);
     const [hovered, setHovered] = useState<number | null>(null);
+    const debouncedId = useDebounce(hovered, 1000);
     const [videoData, setVideoData] = useState<Video[] | null>(null);
 
-    // function to fetch trailer
-    const getVideo = async (id?: number | null) => {
-        setVideoData(null);
-        if (id) {
-            setHovered(id);
-            const res: Video[] = await fetchVideos(id, type);
-            let trailers = res.filter(video => video.type === 'Trailer');
-            setVideoData([...trailers]);
-        } else {
-            setHovered(null);
-        }
-    }
-
+    // initial useEffect to fetch title logos
     useEffect(() => {
         const getMovieLogos = async () => {
             const res = await fetchTitleImages(media, type);
@@ -39,19 +30,34 @@ const Slider = ({ media, type }: Props) => {
 
         getMovieLogos();
     }, [media]);
+
+    // useEffect to fetch videos after hovering for a period of time
+    useEffect(() => {
+        if (debouncedId !== null) {
+            setVideoData(null);
+            const fetchTrailer = async (id: number) => {
+                const res: Video[] = await fetchVideos(id, type);
+                let trailers = res.filter(video => video.type === 'Trailer' && video.official === true);
+                setVideoData([...trailers]);
+            }
+            fetchTrailer(debouncedId);
+        }
+
+    }, [debouncedId])
+
     return (
-        <div className="flex gap-4 h-full overflow-x-scroll no-scroll-horizontal">
+        <div className={`flex gap-4 h-[${height}px] overflow-x-scroll custom-scroll-horizontal`}>
             {movieImageData
                 ? media.map((movie: Movie, i: number) => (
                     <Link
                         className="shrink-0 relative w-fit"
                         href={`/media/${movie.id}`}
                         key={i}
-                        onMouseEnter={() => getVideo(movie.id)}
+                        onMouseEnter={() => setHovered(movie.id)}
                         onMouseLeave={() => setHovered(null)}>
-                        {hovered === movie.id
+                        {debouncedId === movie.id && hovered
                             ? (
-                                <div className="w-[360px] h-full center-flex">
+                                <div className="w-[410px] h-full center-flex">
                                     {!videoData
                                         ? (
                                             <Image
@@ -65,8 +71,8 @@ const Slider = ({ media, type }: Props) => {
                                         )
                                         : (
                                             <iframe
-                                                className="w=-full h-full"
-                                                src={`https://www.youtube.com/embed/${videoData[0].key}`}
+                                                className="w-full h-full z-[-1]"
+                                                src={`https://www.youtube.com/embed/${videoData[0].key}?autoplay=1&mute=1&controls=0`}
                                                 title={`${movie.title}-trailer`}
                                                 allowFullScreen
                                             />

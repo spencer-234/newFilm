@@ -70,7 +70,7 @@ const Trending = ({ media }: Props) => {
                             <div className="relative w-screen h-full" key={i} ref={imageRef}>
                                 <Image
                                     src={`${imageUrl + movie.backdrop_path}`}
-                                    className="w-full h-full object-cover object-center lg:object-custom-top"
+                                    className="w-full h-full object-cover object-center lg:object-custom-top 2xl:object-custom-lg"
                                     width={0}
                                     height={0}
                                     sizes="100vw"

@@ -1,5 +1,6 @@
 "use client"
 
+import { useDebounce } from "@/hooks/useDebounce"
 import { useState } from "react"
 import { useEffect } from "react"
 
@@ -10,21 +11,23 @@ interface Props {
 
 const Search = ({ open }: Props) => {
     const [input, setInput] = useState<string>("");
+    const debouncedInput = useDebounce(input);
     const [searchResults, setSearchResults] = useState<string[]>([]);
 
     useEffect(() => {
+        if (debouncedInput) {
+            const fetchSearchResults = async () => {
+                await fetch(`/api/get-media/search?query=${debouncedInput}`, { cache: 'no-store' })
+                    .then((res) => res.json())
+                    .then(data => setSearchResults(data.data));
+            }
 
-        const timer = setTimeout(async () => {
-            await fetch(`/api/get-media/search?query=${input}`, { cache: 'no-store' })
-                .then((res) => res.json())
-                .then(data => setSearchResults(data.data));
-        }, 600)
-
-        return () => {
-            clearTimeout(timer)
+            fetchSearchResults()
+        } else {
+            setSearchResults([]);
         }
 
-    }, [input])
+    }, [debouncedInput])
 
     return (
         <div className={`max-w-[600px] bg-black ${open && "search-open-animation"} top-[70px] 2xl:top-[20px] absolute center-flex flex-col rounded-lg`}>

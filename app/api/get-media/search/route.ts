@@ -23,6 +23,11 @@ export const GET = async (request: NextRequest) => {
 
     // fetch tmbd api based on query
     try {
+
+        if (!query) {
+            return NextResponse.json({ data: [] }, { status: 200 });
+        }
+
         const [movies, tvShows]: Array<string[]> = await Promise.all([
             fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&query=${query}&include_adult=false&language=en-US&page=1`)
                 .then(res => res.json())
