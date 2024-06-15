@@ -37,7 +37,7 @@ export default function Home() {
           <p className="text-xl">Sign up now to watch your favorite movies and tv shows!</p>
           <div className="flex w-full px-3">
             <input type="email" onChange={(e) => setEmail(e.target.value)} className="rounded-s-md flex-1 pl-1" placeholder="Email Address" />
-            <Link href="#" className="rounded-e-md bg-red-600 px-3 flex-5 font-semibold">Get Started</Link>
+            <Link href={`/sign-up?email=${email}`} className="rounded-e-md bg-red-600 px-3 flex-5 font-semibold">Get Started</Link>
           </div>
           <span>Already have an account? <Link href="/login" className="hover:underline">Login</Link></span>
         </HeroHighlight>
