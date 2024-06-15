@@ -39,7 +39,7 @@ export default function Home() {
             <input type="email" onChange={(e) => setEmail(e.target.value)} className="rounded-s-md flex-1 pl-1" placeholder="Email Address" />
             <Link href="#" className="rounded-e-md bg-red-600 px-3 flex-5 font-semibold">Get Started</Link>
           </div>
-          <span>Already have an account? <Link href="#" className="hover:underline">Login</Link></span>
+          <span>Already have an account? <Link href="/login" className="hover:underline">Login</Link></span>
         </HeroHighlight>
       </section>
 

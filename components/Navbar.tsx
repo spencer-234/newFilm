@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Search from "./Search"
 import { useState } from "react"
+import Link from "next/link"
 
 const Navbar = () => {
 
@@ -22,14 +23,16 @@ const Navbar = () => {
             <nav className="center-flex px-4 md:px-[40px] w-screen py-3 bg-black transition-all relative z-[999]">
                 <div className="flex items-center max-w-[var(--max-width)] w-full relative">
                     <div className="center-flex">
-                        <Image
-                            src="/assets/logo.png"
-                            width={50}
-                            height={50}
-                            alt="new-film-logo"
-                            priority={true}
-                        />
-                        <h1 className="ml-1 mr-10 font-bold text-2xl main-gradient bg-clip-text text-transparent pr-[5px]"><i>NewFilm</i></h1>
+                        <Link href="/" className="center-flex w-fit">
+                            <Image
+                                src="/assets/logo.png"
+                                width={50}
+                                height={50}
+                                alt="new-film-logo"
+                                priority={true}
+                            />
+                            <h1 className="ml-1 mr-10 font-bold text-2xl main-gradient bg-clip-text text-transparent pr-[5px]"><i>NewFilm</i></h1>
+                        </Link>
                         <ul className="hidden gap-5 sm:center-flex">
                             <li><a href="#" className="option">Home</a></li>
                             <li><a href="#" className="option">Movies</a></li>
@@ -61,7 +64,7 @@ const Navbar = () => {
                                     <li><a href="#" className="option">Home</a></li>
                                     <li><a href="#" className="option">Movies</a></li>
                                     <li><a href="#" className="option">TV Shows</a></li>
-                                    <li><a href="#" className="option">Login</a></li>
+                                    <li><a href="/login" className="option">Login</a></li>
                                 </ul>
                             </>
                         )
@@ -78,7 +81,7 @@ const Navbar = () => {
                         )
                     }
                     <ul className=" hidden sm:center-flex">
-                        <li><a href="#" className="option">Login</a></li>
+                        <li><a href="/login" className="option">Login</a></li>
                     </ul>
                 </div>
                 {searchOpen && <Search open={searchOpen} />}
