@@ -45,7 +45,16 @@ export interface Video {
 }
 
 export interface HomeMedia {
-    trending: Movie[],
-    topRated: Movie[],
-    topRatedTv: Movie[],
+    trending: Movie[]
+    topRated: Movie[]
+    topRatedTv: Movie[]
+}
+
+export interface User {
+    id: number
+    email: string
+    profilePicture?: string
+    firstName: string
+    lastName: string
+    password: string
 }
