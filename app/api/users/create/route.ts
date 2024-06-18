@@ -1,16 +1,25 @@
-import db from "@/db/db";
+
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+import { connectToDB } from "@/db/mongodb/connect";
+import User from "@/db/models/userSchema";
+
+interface FormData {
+    email: string
+    firstName: string
+    lastName: string
+    password: string
+}
 
 export const POST = async (request: NextRequest) => {
-    const userData = await request.json();
+    const { email, firstName, lastName, password }: FormData = await request.json();
 
     try {
-        const emailCheck = await db.user.findUnique({
-            where: {
-                email: userData.email
-            }
-        })
+        await connectToDB();
+
+        const emailCheck = await User.findOne({
+            email: email
+        });
 
         console.log(emailCheck);
 
@@ -19,19 +28,17 @@ export const POST = async (request: NextRequest) => {
         }
 
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(userData.password, salt);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-        const username = userData.email.split('@')[0];
+        const username = email.split('@')[0];
 
-        await db.user.create({
-            data: {
-                firstName: userData.firstName,
-                lastName: userData.lastName,
-                email: userData.email,
-                username: username,
-                password: hashedPassword,
-                profilePicture: "",
-            }
+        await User.create({
+            email: email,
+            password: hashedPassword,
+            username: username,
+            firstName: firstName,
+            lastName: lastName,
+
         })
 
         return NextResponse.json({ message: 'User Created' }, { status: 200 });
