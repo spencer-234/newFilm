@@ -70,9 +70,9 @@ const SignUp = ({ params }: { params: { email: string } }) => {
     return (
         <section className="w-screen h-[calc(100vh-74px)] center-flex px-5">
             <div className="flex rounded-xl overflow-hidden border border-slate-500">
-                <div className="flex-1 flex flex-col py-4 px-4 bg-black gap-3">
+                <div className="flex-1 flex flex-col py-4 px-4 bg-black gap-3 min-w-[250px] sm:w-[60vw] md:w-fit">
                     <h2 className="font-extrabold text-2xl">Sign up</h2>
-                    <div className="flex gap-5">
+                    <div className="flex flex-col gap-5 md:flex-row">
                         <div className="flex-1 flex flex-col">
                             <label htmlFor="firstName text-lg">First Name</label>
                             <input type="text" id="firstName" className="form-input" name="firstName" onChange={handleChange} />
@@ -98,7 +98,7 @@ const SignUp = ({ params }: { params: { email: string } }) => {
                     <span className="self-center">Already have an account? <Link href="/login" className="hover:underline">Login</Link></span>
                     {errorMessage && <span className="text-red-500 self-center">{errorMessage}</span>}
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 hidden lg:flex">
                     <Image
                         src="/assets/sign-up.png"
                         alt=""

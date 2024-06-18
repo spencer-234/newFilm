@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation"
 import { socialLogin, credentialsLogin } from "../actions"
 import { MouseEvent, useState } from "react"
 import { checkEmptyInputs } from "@/utils/checkEmptyInputs"
-import { useSession } from "next-auth/react"
 
 const Login = () => {
 
@@ -43,7 +42,7 @@ const Login = () => {
     return (
         <section className="w-screen h-[calc(100vh-74px)] center-flex px-5">
             <div className="flex rounded-xl overflow-hidden border border-slate-500">
-                <div className="flex-1">
+                <div className="flex-1 hidden lg:flex">
                     <Image
                         src="/assets/login.png"
                         alt=""
@@ -53,7 +52,7 @@ const Login = () => {
                         className="w-[700px] h-auto"
                     />
                 </div>
-                <div className="flex-1 flex flex-col py-4 px-4 bg-black gap-4">
+                <div className="flex-1 flex flex-col py-4 px-4 bg-black gap-4 min-w-[250px] sm:w-[60vw] lg:w-fit">
                     <h2 className="text-3xl font-bold">Login</h2>
                     <label htmlFor="username" className="text-lg" >Username</label>
                     <input type="text" id="username" className="form-input" name="username" onChange={handleChange} />
@@ -70,7 +69,7 @@ const Login = () => {
                     </div>
                     <form className="center-flex mt-4 w-full" action={socialLogin}>
                         <button
-                            className="bg-[#fc7569] hover:bg-[#ff4e4e] center-flex self-center rounded-lg w-[70%] py-1 gap-2"
+                            className="bg-[#fc7569] hover:bg-[#ff4e4e] center-flex self-center rounded-lg w-[70%] py-1 gap-2 px-2"
                             name="action"
                             value="google"
                             type="submit"
