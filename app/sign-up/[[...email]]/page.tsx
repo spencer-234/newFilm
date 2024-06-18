@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 import { checkEmptyInputs } from "@/utils/checkEmptyInputs"
-import { useRouter } from "next/navigation"
+import { redirect } from "next/navigation"
 
 interface Inputs {
     firstName: string,
@@ -15,8 +15,6 @@ interface Inputs {
 }
 
 const SignUp = ({ params }: { params: { email: string } }) => {
-
-    const router = useRouter();
 
     // state to track when data is submitting to disable button
     const [submitting, setSubmitting] = useState<boolean>(false);
@@ -56,10 +54,12 @@ const SignUp = ({ params }: { params: { email: string } }) => {
                         setErrorMessage(data.error)
                     } else {
                         setSubmitting(false);
-                        router.push("/login");
+                        redirect("/login");
                     }
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                    setErrorMessage("Something went wrong");
+                });
 
         }
         setSubmitting(false);
