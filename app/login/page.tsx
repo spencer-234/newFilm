@@ -12,10 +12,6 @@ const Login = () => {
 
     const router = useRouter();
 
-    const { data: session } = useSession();
-
-    console.log(session);
-
     const [inputs, setInputs] = useState({
         username: "",
         password: "",
@@ -34,8 +30,9 @@ const Login = () => {
             if (checkEmptyInputs(inputs, setErrorMessage)) {
                 const response = await credentialsLogin(inputs);
                 if (response) {
-                    console.log('cool');
-                    // router.push("/");
+                    router.push("/");
+                } else {
+                    setErrorMessage("Try Again");
                 }
             }
         } catch (err) {

@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 import { checkEmptyInputs } from "@/utils/checkEmptyInputs"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 interface Inputs {
     firstName: string,
@@ -15,6 +15,8 @@ interface Inputs {
 }
 
 const SignUp = ({ params }: { params: { email: string } }) => {
+
+    const router = useRouter();
 
     // state to track when data is submitting to disable button
     const [submitting, setSubmitting] = useState<boolean>(false);
@@ -54,7 +56,7 @@ const SignUp = ({ params }: { params: { email: string } }) => {
                         setErrorMessage(data.error)
                     } else {
                         setSubmitting(false);
-                        redirect("/login");
+                        router.push("/login");
                     }
                 })
                 .catch((err) => {
@@ -83,9 +85,9 @@ const SignUp = ({ params }: { params: { email: string } }) => {
                     <label htmlFor="email" className="text-lg">Email</label>
                     <input type="email" id="email" className="form-input" name="email" value={formInputs.email} onChange={handleChange} />
                     <label htmlFor="password" className="text-lg">Password</label>
-                    <input type="text" id="password" className="form-input" name="password" onChange={handleChange} />
+                    <input type="password" id="password" className="form-input" name="password" onChange={handleChange} />
                     <label htmlFor="confirmPassword" className="text-lg">Confirm Password</label>
-                    <input type="text" id="confirmPassword" className="form-input" name="confirmPassword" onChange={handleChange} />
+                    <input type="password" id="confirmPassword" className="form-input" name="confirmPassword" onChange={handleChange} />
                     <button
                         className="border border-white px-2 py-1 text-lg rounded-md w-[50%] self-center my-5 hover:bg-slate-900"
                         onClick={handleSubmit}

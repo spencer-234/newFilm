@@ -21,8 +21,6 @@ export const POST = async (request: NextRequest) => {
             email: email
         });
 
-        console.log(emailCheck);
-
         if (emailCheck !== null) {
             return NextResponse.json({ error: "User with that email already exists" }, { status: 409 });
         }

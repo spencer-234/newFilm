@@ -8,7 +8,6 @@ interface Props {
 
 const MainSlider = ({ movies }: Props) => {
     const randomInts: number[] = [];
-    console.log(movies);
 
     for (let i = 0; i < 5; i++) {
         let random = Math.floor(Math.random() * (20));
@@ -17,7 +16,6 @@ const MainSlider = ({ movies }: Props) => {
         }
         randomInts.push(random);
     }
-    console.log(randomInts);
 
     return (
         <section className="flex items-center justify-center">
