@@ -82,7 +82,7 @@ const Login = () => {
                         </button>
                     </form>
                     {errorMessage && <span className="text-red-500 self-center">{errorMessage}</span>}
-                    <span className="text-sm self-center">Don't have an account? <Link href="/sign-up" className="hover:underline">Sign up</Link></span>
+                    <span className="text-sm self-center">Don&apos;t have an account? <Link href="/sign-up" className="hover:underline">Sign up</Link></span>
                 </div>
             </div>
         </section>
