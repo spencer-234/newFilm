@@ -57,7 +57,7 @@ const Login = () => {
                     <label htmlFor="username" className="text-lg" >Username</label>
                     <input type="text" id="username" className="form-input" name="username" onChange={handleChange} />
                     <label htmlFor="password" className="text-lg">Password</label>
-                    <input type="text" id="password" className="form-input" name="password" onChange={handleChange} />
+                    <input type="password" id="password" className="form-input" name="password" onChange={handleChange} />
                     <button
                         className="border border-white px-2 py-1 text-lg rounded-md w-[50%] self-center mt-2 hover:bg-slate-900"
                         onClick={handleSubmit}

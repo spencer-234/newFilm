@@ -2,16 +2,21 @@ import { NextResponse, NextRequest } from "next/server";
 import { baseUrl } from "@/utils/urlConstants";
 import { MediaImageObject } from "@/typings";
 
+interface MovieFields {
+    movieInfo: { id: number, language: string }[]
+    type: string
+}
+
 export const POST = async (request: NextRequest) => {
     // get ids of movies and type of media 
-    const req = await request.json();
-    const ids: number[] = req.ids;
+    const req: MovieFields = await request.json();
+    const movieInfo = req.movieInfo;
     const type: string = req.type;
 
     try {
 
         // fetch all images associated with movie id from tmdb
-        const movieImagesPromises = await Promise.all(ids.map((id) => fetch(`${baseUrl}/${type}/${id}/images?api_key=${process.env.API_KEY}&include_image_language=en`)));
+        const movieImagesPromises = await Promise.all(movieInfo.map((movie) => fetch(`${baseUrl}/${type}/${movie.id}/images?api_key=${process.env.API_KEY}&include_image_language=en,${movie.language}`)));
         const movieImagesResponse = await Promise.all(movieImagesPromises.map(p => p.json()));
 
         // filter out the logos that are in english

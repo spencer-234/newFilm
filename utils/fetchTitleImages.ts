@@ -1,12 +1,16 @@
 import { Movie } from "@/typings";
 
 export const fetchTitleImages = async (media: Movie[], type: string) => {
-    const movieIds = media.map(movie => movie.id);
+    const movieInfo = media.map(movie => ({
+        id: movie.id,
+        language: movie.original_language
+    }));
+
     const res = await fetch('/api/get-media/title-logos', {
         method: 'POST',
         cache: 'no-store',
         body: JSON.stringify({
-            ids: movieIds,
+            movieInfo: movieInfo,
             type: type
         })
     })

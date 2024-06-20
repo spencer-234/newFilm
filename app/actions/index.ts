@@ -1,5 +1,6 @@
 "use server"
 import { signIn } from "@/auth";
+import { signOut } from "@/auth";
 
 // action for google auth
 export const socialLogin = async (formData: FormData) => {
@@ -21,5 +22,14 @@ export const credentialsLogin = async (inputs: {
         return response;
     } catch (err) {
         throw new Error("Login failed")
+    }
+}
+
+export const logout = async () => {
+    try {
+        const res = await signOut({ redirect: false });
+        return res;
+    } catch (err) {
+        throw err;
     }
 }

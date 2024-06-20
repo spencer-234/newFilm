@@ -72,7 +72,7 @@ const Slider = ({ media, type }: Props) => {
                                         : (
                                             <iframe
                                                 className="w-full h-full z-[-1]"
-                                                src={`https://www.youtube.com/embed/${videoData[0].key}?autoplay=1&mute=1&controls=0`}
+                                                src={videoData.length > 0 ? `https://www.youtube.com/embed/${videoData[0].key}?autoplay=1&mute=1&controls=0` : "https://giphy.com/embed/l4FGk9V8Re8b3gNVu"}
                                                 title={`${movie.title}-trailer`}
                                                 allowFullScreen
                                             />
