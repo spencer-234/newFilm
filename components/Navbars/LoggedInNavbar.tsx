@@ -5,7 +5,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { Session } from "next-auth"
 import { logout } from "@/app/actions"
-import { useRouter } from "next/navigation"
 
 interface Props {
     menuOpen: boolean
@@ -14,8 +13,6 @@ interface Props {
 }
 
 const LoggedInNavbar = ({ menuOpen, setMenuOpen, session }: Props) => {
-
-    const router = useRouter();
 
     const handleSubmit = async () => {
         try {

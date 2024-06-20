@@ -28,9 +28,7 @@ const Login = () => {
         try {
             if (checkEmptyInputs(inputs, setErrorMessage)) {
                 const response = await credentialsLogin(inputs);
-                if (response) {
-                    router.push("/");
-                } else {
+                if (!response) {
                     setErrorMessage("Try Again");
                 }
             }

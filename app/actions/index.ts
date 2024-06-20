@@ -16,12 +16,12 @@ export const credentialsLogin = async (inputs: {
         const response = await signIn("credentials", {
             username: inputs.username,
             password: inputs.password,
-            redirect: false
+            redirectTo: "/"
         })
 
         return response;
     } catch (err) {
-        throw new Error("Login failed")
+        throw err;
     }
 }
 
