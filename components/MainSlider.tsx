@@ -1,5 +1,5 @@
 import { Movie } from "@/typings";
-import { baseUrl } from "@/utils/baseUrl";
+import { imageUrl } from "@/utils/urlConstants";
 import Image from "next/image";
 
 interface Props {
@@ -22,7 +22,7 @@ const MainSlider = ({ movies }: Props) => {
             {movies ? (
                 randomInts.map((i) => (
                     <Image
-                        src={`${baseUrl}${movies[i].poster_path}`} key={i}
+                        src={`${imageUrl}${movies[i].poster_path}`} key={i}
                         width={300}
                         height={500}
                         alt={`${movies[i].name}-poster`}

@@ -2,14 +2,11 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { socialLogin, credentialsLogin } from "../actions"
 import { MouseEvent, useState } from "react"
 import { checkEmptyInputs } from "@/utils/checkEmptyInputs"
 
 const Login = () => {
-
-    const router = useRouter();
 
     const [inputs, setInputs] = useState({
         username: "",

@@ -58,3 +58,11 @@ export interface User {
     lastName: string
     password: string
 }
+
+export interface SearchResult {
+    id: number
+    title: string
+    poster_path: string
+    release_date: string | undefined
+    type: string
+}

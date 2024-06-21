@@ -1,24 +1,30 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Movie } from "@/typings";
+import { SearchResult } from "@/typings";
 
 export const GET = async (request: NextRequest) => {
     // get query from url
     const searchParams = request.nextUrl.searchParams;
     const query = searchParams.get('query');
 
-    // function to filter titles of out fetched array in case of no titles and return 5 titles
+    // function to return id, title, poster, and release date of the first five movies from fetched data
     const getTitles = (media: Movie[], type: string) => {
-        const titles: string[] = [];
+        let filteredFive: SearchResult[] = [];
+
         if (media) {
-            let property: string = (type === 'movies') ? 'title' : 'name';
-            const mediaWithTitles: Movie[] = media.filter((movie) => Object.hasOwn(movie, property));
-            for (let i = 0; i < ((media.length > 5) ? 5 : media.length); i++) {
-                (property === 'name')
-                    ? titles.push(mediaWithTitles[i].name)
-                    : titles.push(mediaWithTitles[i].title)
-            }
+            let property: string = (type === 'movie') ? 'title' : 'name';
+            const mediaPropertyCheck: Movie[] = media.filter((movie) => Object.hasOwn(movie, property));
+            const firstFive: Movie[] = mediaPropertyCheck.length > 4 ? mediaPropertyCheck.slice(0, 4) : mediaPropertyCheck;
+            filteredFive = firstFive.map((movie) => ({
+                id: movie.id,
+                title: type === 'movie' ? movie.title : movie.name,
+                poster_path: movie.poster_path,
+                release_date: movie.release_date,
+                type: type
+            }))
+
         }
-        return titles;
+        return filteredFive;
     };
 
     // fetch tmbd api based on query
@@ -28,13 +34,13 @@ export const GET = async (request: NextRequest) => {
             return NextResponse.json({ data: [] }, { status: 200 });
         }
 
-        const [movies, tvShows]: Array<string[]> = await Promise.all([
+        const [movies, tvShows]: Array<SearchResult[]> = await Promise.all([
             fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&query=${query}&include_adult=false&language=en-US&page=1`)
                 .then(res => res.json())
-                .then((data) => getTitles(data.results, 'movies')),
+                .then((data) => getTitles(data.results, 'movie')),
             fetch(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.API_KEY}&query=${query}&include_adult=false&language=en-US&page=1`)
                 .then(res => res.json())
-                .then((data) => getTitles(data.results, 'shows')),
+                .then((data) => getTitles(data.results, 'tv')),
         ])
 
         // sort list of movies and tvShows alphabetically

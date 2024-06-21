@@ -1,8 +1,11 @@
 "use client"
 
 import { useDebounce } from "@/hooks/useDebounce"
-import { useState } from "react"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
+import { SearchResult } from "@/typings"
+import Link from "next/link"
+import Image from "next/image"
+import { imageUrl } from "@/utils/urlConstants"
 
 interface Props {
     open: boolean
@@ -12,7 +15,9 @@ interface Props {
 const Search = ({ open }: Props) => {
     const [input, setInput] = useState<string>("");
     const debouncedInput = useDebounce(input);
-    const [searchResults, setSearchResults] = useState<string[]>([]);
+    const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+
+    console.log(searchResults);
 
     useEffect(() => {
         if (debouncedInput) {
@@ -37,14 +42,29 @@ const Search = ({ open }: Props) => {
                 className="w-full rounded-3xl px-3 py-1"
                 onChange={(e) => setInput(e.target.value)}
             />
-            {searchResults && searchResults.map((result, i) => (
-                <p
-                    key={i}
-                    className="w-full text-start px-3 py-[6px] cursor-pointer hover:bg-slate-700"
-                >
-                    {result}
-                </p>
-            ))}
+            <div className="w-full max-h-[500px] overflow-y-scroll custom-scroll-vertical">
+                {searchResults && searchResults.map((result, i) => (
+                    <Link
+                        key={i}
+                        href={`/${result.type}/${result.id}`}
+                        className="w-full justify-between px-3 py-[6px] cursor-pointer hover:bg-slate-700 center-flex"
+                    >
+                        <p className="w-[70%]">
+                            {result.title},{" "}
+                            <span className=" text-gray-400">{result.release_date?.split('-')[0]}</span>
+                        </p>
+                        <Image
+                            src={`${imageUrl + result.poster_path}`}
+                            width={0}
+                            height={0}
+                            sizes="100vw"
+                            alt={`${result.title}-poster`}
+                            className="w-[10%] h-auto"
+                            priority={true}
+                        />
+                    </Link>
+                ))}
+            </div>
         </div>
     )
 }

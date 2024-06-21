@@ -117,7 +117,12 @@
     @apply bg-transparent h-[5px];
   }
 
-  .custom-scroll-horizontal::-webkit-scrollbar-thumb {
+  .custom-scroll-vertical::-webkit-scrollbar {
+    @apply bg-transparent w-[5px];
+  }
+
+  .custom-scroll-horizontal::-webkit-scrollbar-thumb,
+  .custom-scroll-vertical::-webkit-scrollbar-thumb {
     @apply bg-slate-500;
   }
 }
