@@ -6,18 +6,18 @@ import { SearchResult } from "@/typings"
 import Link from "next/link"
 import Image from "next/image"
 import { imageUrl } from "@/utils/urlConstants"
+import { Dispatch, SetStateAction } from "react"
 
 interface Props {
     open: boolean
+    setSearch: Dispatch<SetStateAction<boolean>>
 }
 
 
-const Search = ({ open }: Props) => {
+const Search = ({ open, setSearch }: Props) => {
     const [input, setInput] = useState<string>("");
     const debouncedInput = useDebounce(input);
     const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-
-    console.log(searchResults);
 
     useEffect(() => {
         if (debouncedInput) {
@@ -48,6 +48,7 @@ const Search = ({ open }: Props) => {
                         key={i}
                         href={`/${result.type}/${result.id}`}
                         className="w-full justify-between px-3 py-[6px] cursor-pointer hover:bg-slate-700 center-flex"
+                        onClick={() => setSearch(false)}
                     >
                         <p className="w-[70%]">
                             {result.title},{" "}

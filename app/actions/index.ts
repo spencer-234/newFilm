@@ -13,13 +13,11 @@ export const credentialsLogin = async (inputs: {
     password: string
 }) => {
     try {
-        const response = await signIn("credentials", {
+        await signIn("credentials", {
             username: inputs.username,
             password: inputs.password,
             redirectTo: "/"
         })
-
-        return response;
     } catch (err) {
         throw err;
     }

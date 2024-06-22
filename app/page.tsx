@@ -15,6 +15,8 @@ export default function Home() {
   const [homeMedia, setHomeMedia] = useState<HomeMedia | null>(null);
   const [email, setEmail] = useState<string>("");
 
+  console.log(homeMedia?.topRated);
+
   // state for currently selected category in slider
   const [tv, setTv] = useState<boolean>(false);
 

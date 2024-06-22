@@ -51,7 +51,7 @@ const Slider = ({ media, type }: Props) => {
                 ? media.map((movie: Movie, i: number) => (
                     <Link
                         className="shrink-0 relative w-fit"
-                        href={`/media/${movie.id}`}
+                        href={`/${type}/${movie.id}`}
                         key={i}
                         onMouseEnter={() => setHovered(movie.id)}
                         onMouseLeave={() => setHovered(null)}>

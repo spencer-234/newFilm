@@ -15,6 +15,14 @@ export interface Movie {
     vote_average: number
     vote_count: number
     name: string
+    videos?: {
+        results: Video[]
+    }
+    tagline?: string
+    credits?: {
+        cast: Person[]
+        crew: Person[]
+    }
 }
 
 export interface MediaImageObject {
@@ -65,4 +73,11 @@ export interface SearchResult {
     poster_path: string
     release_date: string | undefined
     type: string
+}
+
+export interface Person {
+    id: number
+    name: string
+    profile_path: string
+    known_for_department: string
 }

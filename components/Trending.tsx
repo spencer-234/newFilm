@@ -76,14 +76,16 @@ const Trending = ({ media }: Props) => {
                                     sizes="100vw"
                                     alt={`${media[i].title}`}
                                 />
-                                <Image
-                                    src={`${imageUrl + movieImageData[i][0].file_path}`}
-                                    className="w-[90%] h-[30%] absolute bottom-20 left-5 right-auto sm:w-[60%] lg:left-10 max-w-[600px] rounded-lg"
-                                    alt={`${media[i].title}`}
-                                    width={0}
-                                    height={0}
-                                    sizes="100vw"
-                                />
+                                {movieImageData[i].length > 0 &&
+                                    <Image
+                                        src={`${imageUrl + movieImageData[i][0].file_path}`}
+                                        className="w-[90%] h-[30%] absolute bottom-20 left-5 right-auto sm:w-[60%] lg:left-10 max-w-[600px] rounded-lg"
+                                        alt={`${media[i].title}`}
+                                        width={0}
+                                        height={0}
+                                        sizes="100vw"
+                                    />
+                                }
                             </div>
                         ))}
                     </div>

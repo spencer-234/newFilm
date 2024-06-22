@@ -10,7 +10,7 @@ import LoggedInNavbar from "./LoggedInNavbar"
 
 const Navbar = () => {
 
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
 
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
@@ -53,7 +53,7 @@ const Navbar = () => {
                         className="cursor-pointer ml-auto mr-5 md:mr-7"
                         onClick={() => handleSearchOpen()}
                     />
-                    {status !== "authenticated"
+                    {!session?.user
                         ? <LoggedOutNavbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
                         : <LoggedInNavbar
                             menuOpen={menuOpen}
@@ -62,7 +62,7 @@ const Navbar = () => {
                         />
                     }
                 </div>
-                {searchOpen && <Search open={searchOpen} />}
+                {searchOpen && <Search open={searchOpen} setSearch={setSearchOpen} />}
             </nav>
         </header>
     )
