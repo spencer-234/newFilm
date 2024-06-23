@@ -4,7 +4,7 @@ export interface Movie {
     media_type?: string
     release_date?: string
     first_air_date: string
-    genre_ids: number[]
+    genres: Genre[]
     id: number
     origin_country: string[]
     original_language: string
@@ -23,6 +23,10 @@ export interface Movie {
         cast: Person[]
         crew: Person[]
     }
+}
+
+export interface Series extends Movie {
+    seasons: Season[]
 }
 
 export interface MediaImageObject {
@@ -80,4 +84,25 @@ export interface Person {
     name: string
     profile_path: string
     known_for_department: string
+}
+
+interface Genre {
+    id: number
+    name: string
+}
+
+interface Company {
+    id: number
+    logo_path: string
+    name: string
+}
+
+interface Season {
+    air_date: string
+    episode_count: number
+    id: number
+    name: string
+    overview: string
+    poster_path: string
+    season_number: number
 }
