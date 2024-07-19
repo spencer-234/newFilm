@@ -91,7 +91,7 @@ const Slider = ({ media, type }: Props) => {
                                         className="w-auto h-full rounded-lg"
                                     />
                                     <Image
-                                        src={`${imageUrl + movieImageData[i][0].file_path}`}
+                                        src={movieImageData[i][0] && `${imageUrl + movieImageData[i][0].file_path}`}
                                         alt={`${movie.title}`}
                                         width={0}
                                         height={0}

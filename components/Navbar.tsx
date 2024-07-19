@@ -1,12 +1,10 @@
 "use client"
 
 import Image from "next/image"
-import Search from "../Search"
+import Search from "./Search"
 import { useState } from "react"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
-import LoggedOutNavbar from "./LoggedOutNavbar"
-import LoggedInNavbar from "./LoggedInNavbar"
 
 const Navbar = () => {
 
@@ -44,23 +42,27 @@ const Navbar = () => {
                             <li><Link href="#" className="option">TV Shows</Link></li>
                         </ul>
                     </div>
-                    <Image
-                        src="/assets/search.svg"
-                        width={25}
-                        height={25}
-                        priority={true}
-                        alt="search-icon"
-                        className="cursor-pointer ml-auto mr-5 md:mr-7"
-                        onClick={() => handleSearchOpen()}
-                    />
-                    {!session?.user
-                        ? <LoggedOutNavbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-                        : <LoggedInNavbar
-                            menuOpen={menuOpen}
-                            setMenuOpen={setMenuOpen}
-                            session={session}
+                    <div className="center-flex ml-auto gap-8">
+                        <Image
+                            src="/assets/search.svg"
+                            width={25}
+                            height={25}
+                            priority={true}
+                            alt="search-icon"
+                            className="cursor-pointer"
+                            onClick={() => handleSearchOpen()}
                         />
-                    }
+                        {session?.user ? (
+                            <Image
+                                src={session.user.image ? session.user.image : "/assets/default-profile.png"}
+                                width={40}
+                                height={40}
+                                alt="user-profile-picture"
+                            />
+                        )
+                            : <Link href="/login" className="option">Login</Link>
+                        }
+                    </div>
                 </div>
                 {searchOpen && <Search open={searchOpen} setSearch={setSearchOpen} />}
             </nav>

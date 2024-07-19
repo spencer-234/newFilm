@@ -20,7 +20,7 @@ const Footer = () => {
                     height={0}
                     priority={true}
                     sizes="100vw"
-                    className="h-auto w-[30vw] max-w-[200px]"
+                    className="h-auto w-[30vw] max-w-[100px]"
                 />
             </div>
             <ul className="flex-1 flex justify-center">
