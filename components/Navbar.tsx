@@ -5,6 +5,7 @@ import Search from "./Search"
 import { useState } from "react"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
+import Sidebar from "./Sidebar"
 
 const Navbar = () => {
 
@@ -23,7 +24,7 @@ const Navbar = () => {
 
     return (
         <header>
-            <nav className="center-flex px-4 md:px-[40px] w-screen py-3 bg-black transition-all relative z-[999]">
+            <nav className="center-flex px-4 md:px-[40px] w-screen py-3 bg-black transition-all relative z-[999] border-b-2 border-[#07FFFF]">
                 <div className="flex items-center max-w-[var(--max-width)] w-full relative">
                     <div className="center-flex">
                         <Link href="/" className="center-flex w-fit">
@@ -58,13 +59,26 @@ const Navbar = () => {
                                 width={40}
                                 height={40}
                                 alt="user-profile-picture"
+                                onClick={() => setMenuOpen(prev => !prev)}
+                                className="rounded-full"
                             />
                         )
-                            : <Link href="/login" className="option">Login</Link>
+                            : <>
+                                <Image
+                                    src={"/assets/menu.svg"}
+                                    alt="menu"
+                                    width={35}
+                                    height={35}
+                                    className="sm:hidden"
+                                    onClick={() => setMenuOpen(prev => !prev)}
+                                />
+                                <Link href="/login" className="option hidden sm:block">Login</Link>
+                            </>
                         }
                     </div>
                 </div>
                 {searchOpen && <Search open={searchOpen} setSearch={setSearchOpen} />}
+                {menuOpen && <Sidebar setMenuOpen={setMenuOpen} />}
             </nav>
         </header>
     )
