@@ -35,7 +35,7 @@ const Search = ({ open, setSearch }: Props) => {
     }, [debouncedInput])
 
     return (
-        <div className={`max-w-[600px] bg-black ${open && "search-open-animation"} top-[70px] 2xl:top-[20px] absolute center-flex flex-col rounded-lg`}>
+        <div className={`max-w-[600px] bg-black ${open && "search-open-animation"} top-[70px] 2xl:top-[12px] absolute center-flex flex-col rounded-lg`}>
             <input
                 type="text"
                 placeholder="Search for movies or tv shows..."

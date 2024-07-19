@@ -1,9 +1,9 @@
 import NextAuth from "next-auth/next"
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcrypt";
-import { connectToDB } from "@/db/mongodb/connect";
+import { connectToDB } from "../../../../db/mongodb/connect.ts";
 import CredentialsProvider from "next-auth/providers/credentials";
-import User from "@/db/models/userSchema.ts";
+import User from "../../../../db/models/userSchema.ts";
 
 const handler = NextAuth({
     providers: [

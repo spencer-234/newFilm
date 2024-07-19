@@ -19,6 +19,7 @@ const Sidebar = ({ setMenuOpen }: Props) => {
                 height={40}
                 alt="close-menu"
                 onClick={() => setMenuOpen(false)}
+                className="cursor-pointer"
             />
             <ul className="w-full flex flex-col items-end text-lg font-semibold gap-6 mt-8">
                 <li className="sidebar-link"><Link href="#" className="option" onClick={() => setMenuOpen(false)}>Home</Link></li>
