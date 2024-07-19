@@ -69,7 +69,7 @@ const TvPage = () => {
                         </section>
                         {/* Cast Section */}
                         <section className="bg-black w-screen p-5 relative pb-10 md:flex flex-col items-center">
-                            <div>
+                            <div className="w-full px-4 flex flex-col max-w-[var(--max-width)] md:m-auto">
                                 <h3 className="text-lg border-b-2 pb-1 mb-5 md:text-2xl max-w-[1000px] w-full text-start">Cast</h3>
                                 <div className="flex overflow-x-scroll custom-scroll-horizontal gap-5 pb-5 mb-10 max-w-[var(--max-width)]">
                                     {series.credits?.cast.slice(0, 20).map((actor, i) => (
