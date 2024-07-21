@@ -22,6 +22,55 @@
   input {
     @apply text-black outline-none;
   }
+
+  .movie-slide {
+    animation: slideDown 10s forwards;
+  }
+
+  .home-gradient {
+    background: linear-gradient(to bottom, rgba(20, 20, 20, 0), rgba(20, 20, 20, 1));
+  }
+
+  .fade-in {
+    animation: fadeIn 2s forwards;
+  }
+
+  .fade-out {
+    animation: fadeOut 2s forwards;
+  }
+
+  /* animation for home page movies */
+  @keyframes slideDown {
+    from {
+      top: 0;
+    }
+
+    to {
+      top: -100px;
+    }
+  }
+
+  /* fade in and out animations for homepage movies */
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
 }
 
 @layer components {
@@ -46,14 +95,6 @@
     transform-origin: center right;
   }
 
-  .object-custom-top {
-    object-position: 0% 10%;
-  }
-
-  .object-custom-lg {
-    object-position: 0% 20%;
-  }
-
   .section-title {
     @apply absolute z-[20] left-0 top-0 font-bold tracking-wider text-lg bg-black bg-opacity-90 pl-4 pr-2 py-2 rounded-ee-lg animate-growdown origin-top md:left-[100px] md:rounded-b-lg 2xl:left-[500px] lg:text-xl border-x-2 border-b-2 border-gray-500;
   }
@@ -64,74 +105,6 @@
 
   .open-mobile {
     animation: slideIn 200ms forwards;
-  }
-
-  /* styles for svg for curved sections */
-  .wave {
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
-  }
-
-  .wave svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 46px;
-  }
-
-  .wave .shape-fill {
-    fill: #141414;
-  }
-
-  .second-wave {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-  }
-
-  .second-wave svg {
-    position: relative;
-    display: block;
-    width: calc(144% + 1.3px);
-    height: 110px;
-  }
-
-  .second-wave .shape-fill {
-    fill: #141414;
-  }
-
-  /* wave for movie and tv page */
-  .third-wave {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
-  }
-
-  .third-wave svg {
-    position: relative;
-    display: block;
-    width: calc(136% + 1.3px);
-    height: 73px;
-  }
-
-  .third-wave .shape-fill {
-    fill: #000000;
-  }
-
-  .third-wave .shape-fill-two {
-    fill: #141414;
   }
 
   /* animation for search bar */

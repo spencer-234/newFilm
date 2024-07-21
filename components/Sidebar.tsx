@@ -17,6 +17,7 @@ const Sidebar = ({ setMenuOpen }: Props) => {
                 src={"/assets/close.svg"}
                 width={40}
                 height={40}
+                priority={true}
                 alt="close-menu"
                 onClick={() => setMenuOpen(false)}
                 className="cursor-pointer"

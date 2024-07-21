@@ -20,7 +20,7 @@ export const GET = async () => {
         ])
 
         const data: HomeMedia = {
-            trending: trending,
+            trending: trending.filter(movie => movie.backdrop_path && movie.poster_path),
             topRated: topRated,
             topRatedTv: topRatedTv,
         }

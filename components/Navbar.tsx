@@ -64,7 +64,7 @@ const Navbar = () => {
                                     className="rounded-full cursor-pointer"
                                 />
                                 {menuOpen && (
-                                    <ul className="absolute bg-black py-3 pr-3 pl-5 border-2 border-t-0 border-[#07FFFF] flex items-end flex-col rounded-b-md top-[48px] right-[-20px]">
+                                    <ul className="absolute hidden bg-black py-3 pr-3 pl-5 border-2 border-t-0 border-[#07FFFF] sm:flex items-end flex-col rounded-b-md top-[48px] right-[-20px]">
                                         <li>
                                             <Link href="#" className="option">Profile</Link>
                                         </li>
