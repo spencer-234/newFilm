@@ -123,13 +123,13 @@ export default function Home() {
             <div ref={containerRef}>
               {showMovie && <Movie current={current} />}
             </div>
-            <div className="z-[2] w-full h-full bg-black bg-opacity-60 center-flex">
+            <div className="z-[2] w-full h-full bg-black bg-opacity-50 center-flex">
               <div className="w-full h-full home-gradient center-flex flex-col gap-5 md:text-lg lg:text-xl">
                 <h2 className="font-extrabold text-2xl lg:text-3xl 2xl:text-4xl">Welcome to <i className="main-gradient bg-clip-text text-transparent pr-1">NewFilm</i></h2>
                 <p className="text-xl font-semibold">Sign up now to watch your favorite movies and tv shows!</p>
                 <div className="flex w-full px-3 max-w-[700px]">
                   <input type="email" className="rounded-s-md flex-1 pl-1 md:py-1 text-black" placeholder="Email Address" ref={emailRef} />
-                  <span className="rounded-e-md hover:bg-red-500 bg-red-600 px-2 text-sm flex-5 center-flex font-semibold" onClick={() => handleSignUp()}>Get Started</span>
+                  <span className="rounded-e-md hover:bg-red-500 bg-red-600 px-2 text-sm flex-5 center-flex font-semibold cursor-pointer" onClick={() => handleSignUp()}>Get Started</span>
                 </div>
                 <span>Already have an account? <Link href="/login" className="hover:text-[#07FFFF] font-semibold">Login</Link></span>
               </div>
