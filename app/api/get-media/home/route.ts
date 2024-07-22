@@ -21,8 +21,8 @@ export const GET = async () => {
 
         const data: HomeMedia = {
             trending: trending.filter(movie => movie.backdrop_path && movie.poster_path),
-            topRated: topRated,
-            topRatedTv: topRatedTv,
+            topRated: topRated.filter(movie => movie.backdrop_path && movie.poster_path),
+            topRatedTv: topRatedTv.filter(movie => movie.backdrop_path && movie.poster_path),
         }
 
         return NextResponse.json({ data: data }, { status: 200 });

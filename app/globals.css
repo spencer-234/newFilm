@@ -74,6 +74,11 @@
 }
 
 @layer components {
+
+  .slider-btn {
+    @apply text-white bg-none border-none font-bold opacity-50 hover:opacity-100 text-5xl absolute top-[150px] z-20;
+  }
+
   .center-flex {
     @apply flex items-center justify-center;
   }

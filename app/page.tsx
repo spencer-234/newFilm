@@ -8,6 +8,7 @@ import { HomeMedia, MediaImageObject } from "@/typings";
 import Footer from "@/components/Footer";
 import { fetchTitleImages } from "@/utils/fetchTitleImages";
 import { useRouter } from "next/navigation";
+import Slider from "@/components/Slider";
 
 
 export default function Home() {
@@ -138,6 +139,11 @@ export default function Home() {
         ) : (
           <div className="w-full h-full animate-pulse bg-zinc-900">
           </div>
+        )}
+      </section>
+      <section className="w-screen h-[400px] p-6 relative">
+        {homeMedia && (
+          <Slider movies={homeMedia?.topRated} type="movie" />
         )}
       </section>
       <Footer />
