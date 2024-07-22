@@ -22,9 +22,6 @@ export default function Home() {
   // ref to track email
   const emailRef = useRef<HTMLInputElement | null>(null);
 
-  // state for currently selected category in slider
-  const [tv, setTv] = useState<boolean>(false);
-
   // variable for selected movie in list
   const [current, setCurrent] = useState<number>(0);
 
@@ -141,10 +138,22 @@ export default function Home() {
           </div>
         )}
       </section>
-      <section className="w-screen h-[400px] p-6 relative">
-        {homeMedia && (
-          <Slider movies={homeMedia?.topRated} type="movie" />
-        )}
+      <section className="w-screen h-fit relative">
+        <h2 className="mr-auto ml-auto w-fit italic font-bold text-3xl md:text-4xl mt-8">Top Rated</h2>
+        <div className="md:flex">
+          <div className="p-6 h-[500px] relative md:flex-1">
+            <h3 className="md:mr-auto md:ml-auto w-fit italic font-bold text-2xl main-gradient bg-clip-text text-transparent pr-1 mb-5">Movies</h3>
+            {homeMedia && (
+              <Slider movies={homeMedia?.topRated} type="movie" />
+            )}
+          </div>
+          <div className="p-6 h-[500px] relative md:flex-1">
+            <h3 className="md:mr-auto md:ml-auto w-fit italic font-bold text-2xl main-gradient bg-clip-text text-transparent pr-1 mb-5">TV Series</h3>
+            {homeMedia && (
+              <Slider movies={homeMedia?.topRatedTv} type="tv" />
+            )}
+          </div>
+        </div>
       </section>
       <Footer />
     </>

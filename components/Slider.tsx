@@ -2,6 +2,7 @@ import { Movie } from "@/typings"
 import { imageUrl } from "@/utils/urlConstants"
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 
 const Slider = ({ movies, type }: { movies: Movie[], type: string }) => {
 
@@ -86,11 +87,12 @@ const Slider = ({ movies, type }: { movies: Movie[], type: string }) => {
                             width={200}
                             alt={`${type === 'movie' ? movie.title : movie.name}-poster`}
                         />
+                        <Link href={`/${type === 'movie' ? 'movie' : 'tv'}/${movie.id}`} className="absolute bottom-[20px] left-[20px] py-1 px-2 bg-white text-black border-2 border-black rounded-lg hover:bg-slate-300">View {type === 'movie' ? 'Movie' : 'Series'}</Link>
                     </div>
                 ))}
             </div>
-            <button className="slider-btn right-[50px]" onClick={() => handleSlide("next")}>{">"}</button>
-            <button className="slider-btn left-[50px]" onClick={() => handleSlide("prev")}>{"<"}</button>
+            <button className="slider-btn right-0 md:right-[50px]" onClick={() => handleSlide("next")}>{">"}</button>
+            <button className="slider-btn left-0 md:left-[50px]" onClick={() => handleSlide("prev")}>{"<"}</button>
         </>
     )
 }
