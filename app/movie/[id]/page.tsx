@@ -6,6 +6,8 @@ import { useParams, useRouter } from "next/navigation"
 import { Movie } from "@/typings";
 import { imageUrl } from "@/utils/urlConstants";
 import { useSession } from "next-auth/react";
+import CastSlider from "@/components/CastSlider";
+import VideoSlider from "@/components/VideoSlider";
 
 const MoviePage = () => {
 
@@ -34,107 +36,92 @@ const MoviePage = () => {
         getMovie();
     }, [])
 
+    console.log(movie);
+
     return (
-        <>
-            {status === 'loading' ? (
-                <section className="w-screen center-flex">
-                    <Image
-                        src="/assets/loading.gif"
-                        width={50}
-                        height={50}
-                        alt="loading"
-                    />
-                </section>
-            ) : status === 'authenticated' ? (
-                <>
-                    {movie ?
-                        (
-                            <>
-                                <section className="w-screen relative pb-20">
-                                    <div className="max-h-[400px] overflow-hidden mb-16">
-                                        <Image
-                                            src={imageUrl + movie?.backdrop_path}
-                                            alt={`${movie?.title}-backdrop`}
-                                            width={0}
-                                            height={0}
-                                            sizes="100vw"
-                                            className="w-screen h-auto blur-[2px]"
-                                        />
-                                    </div>
+        (
+            <>
+                {status === 'loading' ? (
+                    <section className="w-screen h-[300px] animate-pulse bg-zinc-800">
+                    </section>
+                ) : status === 'authenticated' ? (
+                    <>
+                        <section className="w-screen">
+                            <div className={`${!movie ? 'animate-pulse bg-zinc-800' : 'home-gradient'} w-screen h-[300px] xl:h-[400px] overflow-hidden relative`}>
+                                {movie && (
                                     <Image
-                                        src={imageUrl + movie?.poster_path}
-                                        alt={`${movie?.title}-poster`}
+                                        src={imageUrl + movie.backdrop_path}
+                                        alt={`${movie.title}-backdrop`}
                                         width={0}
                                         height={0}
                                         sizes="100vw"
-                                        className="w-[40%] h-auto rounded-lg absolute top-10 left-5 max-w-[300px] md:left-[5vw] 2xl:left-[17vw]"
+                                        className="h-full w-full sm:w-full sm:h-auto min-w-[200px] absolute top-0 left-0 z-[-1] lg:top-[-40px] 2xl:top-[-200px]"
                                     />
-                                    <div className="w-full px-4 flex flex-col gap-4 max-w-[var(--max-width)] md:m-auto md:mt-[100px] md:text-xl">
-                                        <h2 className="font-bold text-xl md:text-2xl">{movie?.title}, <span className="text-gray-500 text-sm">{movie.release_date?.split("-")[0]}</span></h2>
-                                        {movie.tagline && <span className="italic">&quot;{movie.tagline}&quot;</span>}
-                                        <h3 className="text-lg border-b-2 pb-1 md:text-2xl max-w-[1000px]">Overview</h3>
-                                        <p className="h-[150px] overflow-y-scroll custom-scroll-vertical">{movie?.overview}</p>
-                                    </div>
-                                </section>
-                                {/* Cast Section */}
-                                <section className="bg-black w-screen p-5 relative pb-10 md:flex flex-col items-center">
-                                    <div>
-                                        <h3 className="text-lg border-b-2 pb-1 mb-5 md:text-2xl max-w-[1000px] w-full text-start">Cast</h3>
-                                        <div className="flex overflow-x-scroll custom-scroll-horizontal gap-5 pb-5 mb-10 max-w-[var(--max-width)]">
-                                            {movie.credits?.cast.slice(0, 20).map((actor, i) => (
-                                                <div key={i} className="flex-shrink-0 flex flex-col items-center">
-                                                    <Image
-                                                        src={imageUrl + actor.profile_path}
-                                                        alt={`${actor.name}-picture`}
-                                                        width={0}
-                                                        height={0}
-                                                        sizes="100vw"
-                                                        className="w-[100px] h-auto rounded-lg"
-                                                    />
-                                                    <p className="text-center w-[90%]">{actor.name}</p>
-                                                </div>
+                                )}
+                            </div>
+                            {movie && (
+                                <div className="mt-8 px-6 flex gap-8 max-w-[var(--max-width)] md:ml-auto md:mr-auto">
+                                    <div className="flex flex-col gap-3 flex-1">
+                                        <h2 className="fade-in text-3xl font-bold md:text-5xl">{movie.title} <span className="font-medium text-base text-gray-500">{movie.release_date?.split("-")[0]}</span></h2>
+                                        <div>
+                                            {movie.genres.map((genre, i) => (
+                                                <span className="italic text-gray-500" key={i}>
+                                                    {(movie.genres.length - 1) === i ? `${genre.name}` : `${genre.name}, `}
+                                                </span>
                                             ))}
                                         </div>
-                                    </div>
-                                </section>
-                                {/* Video Section*/}
-                                <section className="w-screen p-5 pb-10">
-                                    <div className="max-w-[var(--max-width)] md:mx-auto">
-                                        <h3 className="text-lg border-b-2 pb-1 mb-5 md:text-2xl max-w-[1000px]">Videos</h3>
-                                        <div className="flex overflow-x-scroll custom-scroll-horizontal gap-5 pb-3">
-                                            {movie.videos?.results.map((video, i) => (
-                                                <div className="rounded-lg w-[350px] h-fit flex-shrink-0" key={i}>
-                                                    <iframe
-                                                        className="w-full h-auto"
-                                                        src={`https://www.youtube.com/embed/${video.key}?`}
-                                                        title={`${video.name}`}
-                                                        allowFullScreen
-                                                    />
-                                                </div>
-                                            ))}
+                                        <div className="pb-2 border-b border-gray-500">
+                                            <span className="text-xl md:text-2xl">Overview</span>
                                         </div>
+                                        {movie.overview ? (
+                                            <p className="max-h-[200px] overflow-y-scroll custom-scroll-vertical md:text-xl">{movie.overview}</p>
+                                        ) : (
+                                            <span className="text-xl">No information available</span>
+                                        )}
                                     </div>
-                                </section>
-                            </>
-                        )
-                        : (
-                            <section className="w-screen center-flex h-[500px]">
-                                <Image
-                                    src='/assets/loading.gif'
-                                    width={50}
-                                    height={50}
-                                    alt="loading"
-                                    unoptimized
-                                    style={{ alignSelf: 'center' }}
-                                />
-                            </section>
-                        )
-                    }
-                </>
-            ) :
-                router.push("/login")
-            }
-        </>
+                                    {movie.poster_path && (
+                                        <Image
+                                            src={imageUrl + movie.poster_path}
+                                            alt={`${movie.title}-poster`}
+                                            width={0}
+                                            height={0}
+                                            sizes="100vw"
+                                            className="hidden md:block md:flex-2 w-[250px] h-auto rounded-lg border border-gray-300"
+                                        />
+                                    )}
+                                </div>
+                            )}
+                        </section>
+                        <section className="w-screen px-4 py-10 md:ml-auto md:mr-auto max-w-[var(--max-width)]">
+                            {movie?.credits && (
+                                <div>
+                                    <h3 className="text-2xl md:text-4xl font-semibold pb-2 w-full text-start border-b border-gray-500 mb-8">Cast</h3>
+                                    {movie.credits.cast.length > 0 ? (
+                                        <CastSlider cast={movie.credits.cast} />
+                                    ) : (
+                                        <span className="text-xl">No information available</span>
+                                    )}
+                                </div>
+                            )}
+                        </section>
+                        <section className="w-screen px-4 py-10 md:ml-auto md:mr-auto max-w-[var(--max-width)]">
+                            {movie?.videos && (
+                                <div>
+                                    <h3 className="text-2xl md:text-4xl font-semibold pb-2 w-full text-start border-b border-gray-500 mb-8">Videos</h3>
+                                    {movie.videos.results.length > 0 ? (
+                                        <VideoSlider videos={movie.videos.results} />
+                                    ) : (
+                                        <span className="text-xl">No information available</span>
+                                    )}
+                                </div>
+                            )}
+                        </section>
+                    </>
+                )
+                    : router.push("/login")
+                }
+            </>
+        )
     )
 }
 
