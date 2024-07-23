@@ -59,7 +59,6 @@ const Slider = ({ movies, type }: { movies: Movie[], type: string }) => {
             } else if (direction === 'prev' && (active - 1 >= 0)) {
                 setActive(active - 1);
             }
-            styleMovies(children);
         }
     }
 
@@ -75,6 +74,12 @@ const Slider = ({ movies, type }: { movies: Movie[], type: string }) => {
         getChildren();
 
     }, [])
+
+    useEffect(() => {
+        if (children) {
+            styleMovies(children);
+        }
+    }, [active])
 
     return (
         <>

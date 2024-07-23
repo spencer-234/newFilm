@@ -121,7 +121,7 @@ export default function Home() {
             <div ref={containerRef}>
               {showMovie && <Movie current={current} />}
             </div>
-            <div className="z-[2] w-full h-full bg-black bg-opacity-50 center-flex">
+            <div className="z-[2] w-full h-full bg-black bg-opacity-35 center-flex">
               <div className="w-full h-full home-gradient center-flex flex-col gap-5 md:text-lg lg:text-xl">
                 <h2 className="font-extrabold text-2xl lg:text-3xl 2xl:text-4xl">Welcome to <i className="main-gradient bg-clip-text text-transparent pr-1">NewFilm</i></h2>
                 <p className="text-xl font-semibold">Sign up now to watch your favorite movies and tv shows!</p>
@@ -139,16 +139,16 @@ export default function Home() {
         )}
       </section>
       <section className="mr-auto ml-auto w-screen h-fit relative max-w-[var(--max-width)]">
-        <h2 className="ml-3 w-fit italic font-bold text-3xl md:text-4xl mt-8">Top Rated</h2>
+        <h2 className="mx-5 mb-2 italic font-bold text-3xl md:text-4xl mt-8 border-b-2 border-gray-500 pb-2">Top Rated</h2>
         <div className="md:flex">
-          <div className="p-6 h-[500px] relative md:flex-1">
-            <h3 className="md:mr-auto md:ml-auto w-fit italic font-bold text-2xl main-gradient bg-clip-text text-transparent pr-1 mb-5">Movies</h3>
+          <div className="p-2 h-[400px] relative md:flex-1">
+            <h3 className="md:mx-auto w-fit italic font-bold text-2xl main-gradient bg-clip-text text-transparent pr-1 mb-5">Movies</h3>
             {homeMedia && (
               <Slider movies={homeMedia?.topRated} type="movie" />
             )}
           </div>
-          <div className="p-6 h-[500px] relative md:flex-1">
-            <h3 className="md:mr-auto md:ml-auto w-fit italic font-bold text-2xl main-gradient bg-clip-text text-transparent pr-1 mb-5">TV Series</h3>
+          <div className="p-2 h-[400px] relative md:flex-1">
+            <h3 className="md:mx-auto w-fit italic font-bold text-2xl main-gradient bg-clip-text text-transparent pr-1 mb-5">TV Series</h3>
             {homeMedia && (
               <Slider movies={homeMedia?.topRatedTv} type="tv" />
             )}
