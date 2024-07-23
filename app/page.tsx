@@ -138,8 +138,8 @@ export default function Home() {
           </div>
         )}
       </section>
-      <section className="w-screen h-fit relative">
-        <h2 className="mr-auto ml-auto w-fit italic font-bold text-3xl md:text-4xl mt-8">Top Rated</h2>
+      <section className="mr-auto ml-auto w-screen h-fit relative max-w-[var(--max-width)]">
+        <h2 className="ml-3 w-fit italic font-bold text-3xl md:text-4xl mt-8">Top Rated</h2>
         <div className="md:flex">
           <div className="p-6 h-[500px] relative md:flex-1">
             <h3 className="md:mr-auto md:ml-auto w-fit italic font-bold text-2xl main-gradient bg-clip-text text-transparent pr-1 mb-5">Movies</h3>

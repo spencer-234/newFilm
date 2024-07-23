@@ -1,15 +1,21 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useParams } from "next/navigation"
+import { ChangeEvent, useEffect, useState } from "react"
+import { useParams, useRouter } from "next/navigation"
 import { Series } from "@/typings"
 import { imageUrl } from "@/utils/urlConstants"
 import Image from "next/image"
+import { useSession } from "next-auth/react"
+import CastSlider from "@/components/CastSlider"
+import VideoSlider from "@/components/VideoSlider"
 
 const TvPage = () => {
 
     const { id } = useParams();
     const [series, setSeries] = useState<Series | null>(null);
+    const { data: session, status } = useSession();
+    const router = useRouter();
+    const [season, setSeason] = useState<number>(0);
 
     useEffect(() => {
         const getSeries = async () => {
@@ -31,100 +37,112 @@ const TvPage = () => {
         getSeries();
     }, [])
 
+    useEffect(() => {
+        if (series) {
+            if (series.seasons[0].name === "Specials") {
+                setSeason(1);
+            }
+        }
+    }, [series])
+
+    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        const index = series?.seasons.findIndex(season => season.name === e.target.value);
+        if (index) {
+            setSeason(index);
+        }
+    }
+
+    console.log(series);
+
     return (
         <>
-            {series ?
-                (
-                    <>
-                        <section className="w-screen relative pb-20">
-                            <div className="max-h-[400px] overflow-hidden mb-16">
+            {status === 'loading' ? (
+                <section className="w-screen h-[300px] animate-pulse bg-zinc-800">
+                </section>
+            ) : status === 'authenticated' ? (
+                <>
+                    <section className="w-screen">
+                        <div className={`${!series ? 'animate-pulse bg-zinc-800' : 'home-gradient'} w-screen h-[300px] xl:h-[400px] overflow-hidden relative`}>
+                            {series && (
                                 <Image
-                                    src={imageUrl + series?.backdrop_path}
-                                    alt={`${series?.title}-backdrop`}
+                                    src={imageUrl + series.backdrop_path}
+                                    alt={`${series.name}-backdrop`}
                                     width={0}
                                     height={0}
                                     sizes="100vw"
-                                    className="w-screen h-auto blur-[2px]"
+                                    className="h-full w-full sm:w-full sm:h-auto min-w-[200px] absolute top-0 left-0 z-[-1] lg:top-[-40px] 2xl:top-[-200px]"
                                 />
-                            </div>
-                            <Image
-                                src={imageUrl + series?.poster_path}
-                                alt={`${series?.title}-poster`}
-                                width={0}
-                                height={0}
-                                sizes="100vw"
-                                className="w-[40%] h-auto rounded-lg absolute top-10 left-5 max-w-[300px] md:left-[5vw] 2xl:left-[17vw]"
-                            />
-                            <div className="w-full px-4 flex flex-col gap-4 max-w-[var(--max-width)] md:m-auto md:mt-[100px] md:text-xl">
-                                <h2 className="font-bold text-xl md:text-2xl">{series?.name}, <span className="text-gray-500 text-sm">{series.first_air_date?.split("-")[0]}</span></h2>
-                                {series.tagline && <span className="italic">&quot;{series.tagline}&quot;</span>}
-                                <h3 className="text-lg border-b-2 pb-1 md:text-2xl max-w-[1000px]">Overview</h3>
-                                <p className="h-[150px] overflow-y-scroll custom-scroll-vertical">{series?.overview}</p>
-                            </div>
-                            <div className="third-wave">
-                                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="shape-fill"></path>
-                                </svg>
-                            </div>
-                        </section>
-                        {/* Cast Section */}
-                        <section className="bg-black w-screen p-5 relative pb-10 md:flex flex-col items-center">
-                            <div className="w-full px-4 flex flex-col max-w-[var(--max-width)] md:m-auto">
-                                <h3 className="text-lg border-b-2 pb-1 mb-5 md:text-2xl max-w-[1000px] w-full text-start">Cast</h3>
-                                <div className="flex overflow-x-scroll custom-scroll-horizontal gap-5 pb-5 mb-10 max-w-[var(--max-width)]">
-                                    {series.credits?.cast.slice(0, 20).map((actor, i) => (
-                                        <div key={i} className="flex-shrink-0 flex flex-col items-center">
-                                            <Image
-                                                src={imageUrl + actor.profile_path}
-                                                alt={`${actor.name}-picture`}
-                                                width={0}
-                                                height={0}
-                                                sizes="100vw"
-                                                className="w-[100px] h-auto rounded-lg"
-                                            />
-                                            <p className="text-center w-[90%]">{actor.name}</p>
-                                        </div>
-                                    ))}
+                            )}
+                        </div>
+                        {series && (
+                            <div className="mt-8 px-6 flex gap-8 max-w-[var(--max-width)] md:ml-auto md:mr-auto">
+                                <div className="flex flex-col gap-3 flex-1">
+                                    <h2 className="fade-in text-3xl font-bold md:text-5xl">{series.name} <span className="font-medium text-base text-gray-500">{series.first_air_date.split("-")[0]}</span></h2>
+                                    <div>
+                                        {series.genres.map((genre, i) => (
+                                            <span className="italic text-gray-500" key={i}>
+                                                {(series.genres.length - 1) === i ? `${genre.name}` : `${genre.name}, `}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <div className="pb-2 border-b border-gray-500 flex gap-3 justify-between">
+                                        <span className="text-xl md:text-2xl">Overview</span>
+                                        <select className="bg-black border-white border-2 rounded-lg" value={series.seasons[season].name} onChange={(e) => handleChange(e)}>
+                                            {series.seasons.map((seriesSeason, i) => (
+                                                <option
+                                                    key={i}
+                                                >
+                                                    {seriesSeason.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    {series.seasons[season].overview ? (
+                                        <p className="max-h-[200px] overflow-y-scroll custom-scroll-vertical md:text-xl">{series.seasons[season].overview}</p>
+                                    ) : (
+                                        <span className="text-xl">No information available</span>
+                                    )}
                                 </div>
+                                {series.seasons[season].poster_path && (
+                                    <Image
+                                        src={imageUrl + series.seasons[season].poster_path}
+                                        alt={`${series.name}-poster`}
+                                        width={0}
+                                        height={0}
+                                        sizes="100vw"
+                                        className="hidden md:block md:flex-2 w-[250px] h-auto rounded-lg border border-gray-300"
+                                    />
+                                )}
                             </div>
-                            <div className="third-wave">
-                                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="shape-fill-two"></path>
-                                </svg>
-                            </div>
-                        </section>
-                        {/* Video Section*/}
-                        <section className="w-screen p-5 pb-10">
-                            <div className="max-w-[var(--max-width)] md:mx-auto">
-                                <h3 className="text-lg border-b-2 pb-1 mb-5 md:text-2xl max-w-[1000px]">Videos</h3>
-                                <div className="flex overflow-x-scroll custom-scroll-horizontal gap-5 pb-3">
-                                    {series.videos?.results.map((video, i) => (
-                                        <div className="rounded-lg w-[350px] h-fit flex-shrink-0" key={i}>
-                                            <iframe
-                                                className="w-full h-auto"
-                                                src={`https://www.youtube.com/embed/${video.key}?`}
-                                                title={`${video.name}`}
-                                                allowFullScreen
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </section>
-                    </>
-                )
-                : (
-                    <section className="w-screen center-flex h-[500px]">
-                        <Image
-                            src='/assets/loading.gif'
-                            width={50}
-                            height={50}
-                            alt="loading"
-                            unoptimized
-                            style={{ alignSelf: 'center' }}
-                        />
+                        )}
                     </section>
-                )
+                    <section className="w-screen px-4 py-10 md:ml-auto md:mr-auto max-w-[var(--max-width)]">
+                        {series?.credits && (
+                            <div>
+                                <h3 className="text-2xl md:text-4xl font-semibold pb-2 w-full text-start border-b border-gray-500 mb-8">Cast</h3>
+                                {series.credits.cast.length > 0 ? (
+                                    <CastSlider cast={series.credits.cast} />
+                                ) : (
+                                    <span className="text-xl">No information available</span>
+                                )}
+                            </div>
+                        )}
+                    </section>
+                    <section className="w-screen px-4 py-10 md:ml-auto md:mr-auto max-w-[var(--max-width)]">
+                        {series?.videos && (
+                            <div>
+                                <h3 className="text-2xl md:text-4xl font-semibold pb-2 w-full text-start border-b border-gray-500 mb-8">Videos</h3>
+                                {series.videos.results.length > 0 ? (
+                                    <VideoSlider videos={series.videos.results} />
+                                ) : (
+                                    <span className="text-xl">No information available</span>
+                                )}
+                            </div>
+                        )}
+                    </section>
+                </>
+            )
+                : router.push("/login")
             }
         </>
     )

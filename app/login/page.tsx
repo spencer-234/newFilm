@@ -67,7 +67,7 @@ const Login = () => {
             )
                 : status === 'unauthenticated'
                     ? (
-                        <section className="w-screen h-[calc(100vh-74px)] center-flex px-5">
+                        <section className="w-screen h-[calc(100vh-74px)] center-flex px-3">
                             <div className="flex rounded-xl overflow-hidden border border-slate-500">
                                 <div className="flex-1 hidden lg:flex">
                                     <Image
@@ -79,7 +79,7 @@ const Login = () => {
                                         className="w-[700px] h-auto"
                                     />
                                 </div>
-                                <div className="flex-1 flex flex-col py-4 px-4 bg-black gap-4 min-w-[250px] sm:w-[60vw] lg:w-fit">
+                                <div className="flex-1 flex flex-col py-4 px-4 bg-black gap-4 min-w-[250px] w-[400px] lg:w-fit">
                                     <h2 className="text-3xl font-bold">Login</h2>
                                     <label htmlFor="email" className="text-lg" >Email</label>
                                     <input type="email" id="email" className="form-input" name="email" onChange={handleChange} />

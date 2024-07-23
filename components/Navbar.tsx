@@ -23,7 +23,7 @@ const Navbar = () => {
     }
 
     return (
-        <header>
+        <header className="sticky top-0 z-[999]">
             <nav className="center-flex px-4 md:px-[40px] w-screen py-2 bg-black transition-all relative z-[999] border-b-2 border-[#07FFFF]">
                 <div className="flex items-center max-w-[var(--max-width)] w-full relative">
                     <div className="center-flex">
@@ -64,7 +64,7 @@ const Navbar = () => {
                                     className="rounded-full cursor-pointer"
                                 />
                                 {menuOpen && (
-                                    <ul className="absolute hidden bg-black py-3 pr-3 pl-5 border-2 border-t-0 border-[#07FFFF] sm:flex items-end flex-col rounded-b-md top-[48px] right-[-20px]">
+                                    <ul className="absolute hidden bg-black py-3 pr-3 pl-5 border-2 border-t-0 border-[#07FFFF] sm:flex items-end flex-col rounded-b-md top-[48px] right-[-20px] z-50">
                                         <li>
                                             <Link href="#" className="option">Profile</Link>
                                         </li>

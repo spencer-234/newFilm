@@ -84,6 +84,7 @@ export interface Person {
     name: string
     profile_path: string
     known_for_department: string
+    character?: string
 }
 
 interface Genre {

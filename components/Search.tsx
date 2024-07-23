@@ -35,14 +35,14 @@ const Search = ({ open, setSearch }: Props) => {
     }, [debouncedInput])
 
     return (
-        <div className={`max-w-[600px] bg-black ${open && "search-open-animation"} top-[70px] 2xl:top-[12px] absolute center-flex flex-col rounded-lg`}>
+        <div className={`max-w-[600px] ${open && "search-open-animation"} top-[70px] xl:left-[500px] 2xl:left-auto xl:top-[10px] absolute center-flex flex-col rounded-lg`}>
             <input
                 type="text"
                 placeholder="Search for movies or tv shows..."
                 className="w-full rounded-3xl px-3 py-1"
                 onChange={(e) => setInput(e.target.value)}
             />
-            <div className="w-full max-h-[500px] overflow-y-scroll custom-scroll-vertical">
+            <div className="w-full max-h-[500px] overflow-y-scroll custom-scroll-vertical bg-black rounded-lg">
                 {searchResults && searchResults.map((result, i) => (
                     <Link
                         key={i}
